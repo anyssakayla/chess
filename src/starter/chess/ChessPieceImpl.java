@@ -3,6 +3,8 @@ package chess;
 import java.util.Collection;
 
 public class ChessPieceImpl implements ChessPiece{
+
+  private PieceType pieceType;
   @Override
   public ChessGame.TeamColor getTeamColor() {
     return null;
@@ -10,7 +12,7 @@ public class ChessPieceImpl implements ChessPiece{
 
   @Override
   public PieceType getPieceType() {
-    return null;
+    return pieceType;
   }
 
   @Override
