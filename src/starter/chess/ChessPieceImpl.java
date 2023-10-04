@@ -5,6 +5,11 @@ import java.util.Collection;
 public class ChessPieceImpl implements ChessPiece{
   public ChessGame.TeamColor teamColor = null;
   private PieceType pieceType;
+
+  public ChessPieceImpl(ChessGame.TeamColor color, PieceType pieceType){
+    teamColor = color;
+    this.pieceType = pieceType;
+  }
   @Override
   public ChessGame.TeamColor getTeamColor() {
     return teamColor;
