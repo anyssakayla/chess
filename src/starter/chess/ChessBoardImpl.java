@@ -25,7 +25,7 @@ public class ChessBoardImpl implements ChessBoard{
   @Override
   public void resetBoard() { //sets all pieces to their correct positions
 
-    ChessPositionImpl currPosition = new ChessPositionImpl(); //keeps track of each addition's position
+    ChessPositionImpl currPosition = new ChessPositionImpl(0,0); //keeps track of each addition's position
 
     for(int i = 0; i < 8; i++){ //sets the bottom of the board
       currPosition.setRow(0);
