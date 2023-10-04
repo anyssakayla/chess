@@ -1,5 +1,4 @@
 package chess;
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -103,7 +102,5 @@ public class ChessBoardImpl implements ChessBoard{
       currPosition.setRow(6); //position will be on row 6
       addPiece(currPosition, PiecesOnBoard[6][i]); //add each piece to the board
     }
-
   }
-
 }
