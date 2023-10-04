@@ -3,11 +3,19 @@ package chess;
 import java.util.Collection;
 
 public class ChessPieceImpl implements ChessPiece{
-
+  public ChessGame.TeamColor teamColor = null;
   private PieceType pieceType;
   @Override
   public ChessGame.TeamColor getTeamColor() {
-    return null;
+    return teamColor;
+  }
+
+  public void setTeamColor(ChessGame.TeamColor teamColor){
+    this.teamColor = teamColor;
+  }
+
+  public void setPieceType(PieceType pieceType) {
+    this.pieceType = pieceType;
   }
 
   @Override

@@ -7,43 +7,103 @@ public class ChessBoardImpl implements ChessBoard{
 
   //2d array instead
   //ArrayList<ArrayList<ChessPiece>> ChessOnBoard;
-  ChessPiece.PieceType [][] PiecesOnBoard = new ChessPiece.PieceType[8][8]; //2D array, but how does it use position?
-  ChessPiece chessPiece;
-  Map<ChessPosition, ChessPiece> ChessOnBoards; //later need to be able to serialize and deserialize and map i sharder
-  @Override
-  public void addPiece(ChessPosition position, ChessPiece piece) {//add a piece to the board based on it's position
-    //TODO: does column or row need to go first?
-    PiecesOnBoard[position.getColumn()][position.getRow()] = piece.getPieceType(); //sets the piecetype at its column and row
-    ChessOnBoards.put(position, piece);
-  }
+  ChessPiece[][] PiecesOnBoard = new ChessPiece[8][8]; //2D array, but how does it use position?
 
   @Override
+  public void addPiece(ChessPosition position, ChessPiece piece) {//add a piece to the board based on it's position
+    int curRow = position.getRow(); //get piece's row and column
+    int curColumn = position.getColumn();
+    PiecesOnBoard[curRow][curColumn] = piece; //set the piece at the specified row and column
+  }
+
+  //gets the piece at the indicated position
+  @Override
   public ChessPiece getPiece(ChessPosition position) {
-    ChessPiece associatedPiece = ChessOnBoards.get(position); //gets piece associated with key
+    int pieceRow = position.getRow();
+    int pieceColumn = position.getColumn();
+
+    ChessPiece associatedPiece = PiecesOnBoard[pieceRow][pieceColumn]; //gets piece associated with the position's row and column
     return associatedPiece;
   }
 
   @Override
-  public void resetBoard() { //puts all pieces back to their normal spot
-    ChessOnBoards.clear(); //this is using the Map instead of 2D array
-    chessPiece.getPieceType(); //WRONG get type R and put it at (1,1)
-//    ChessOnBoards.put((1,1), ); //how do I add the first piece at 1,1.
-    // Key only has one int available, can't use (1,1)
-    //clear the map
-    //create a new R at 1,1
-    PiecesOnBoard = new ChessPiece.PieceType[8][8]; //set it to a new board
+  public void resetBoard() { //sets all pieces to their correct positions
 
-    PiecesOnBoard[1][1] = ChessPiece.PieceType.ROOK;
-    PiecesOnBoard[1][2] = ChessPiece.PieceType.KNIGHT;
-    PiecesOnBoard[1][3] = ChessPiece.PieceType.BISHOP;
-    PiecesOnBoard[1][4] = ChessPiece.PieceType.QUEEN;
-    PiecesOnBoard[1][5] = ChessPiece.PieceType.KING;
-    PiecesOnBoard[1][6] = ChessPiece.PieceType.BISHOP;
-    PiecesOnBoard[1][7] = ChessPiece.PieceType.KNIGHT;
-    PiecesOnBoard[1][8] = ChessPiece.PieceType.ROOK;
-    for(int i = 0; i < PiecesOnBoard[2].length; i++){ //put pawns on every column on row 2
-      PiecesOnBoard[2][i] = ChessPiece.PieceType.PAWN;
+    //TODO: Set team colors?
+    ChessPositionImpl currPosition = new ChessPositionImpl(); //keeps track of each addition's position
+
+    for(int i = 0; i < 8; i++){ //sets the bottom of the board
+      currPosition.setRow(0);
+      if(i == 0 || i == 7){ //every rook will be on the corner
+        currPosition.setCollumn(i); //set the column to 0 and 7
+        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
+        addPiece(currPosition, PiecesOnBoard[0][i]); //add the piece at column i
+      }
+      if(i == 1 || i == 6){ //Knights are next to the rooks
+        currPosition.setCollumn(i);
+        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.KNIGHT);
+        addPiece(currPosition, PiecesOnBoard[0][i]);
+      }
+      if(i == 2 || i == 5){ //set bishop in between knights
+        currPosition.setCollumn(i);
+        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.BISHOP);
+        addPiece(currPosition, PiecesOnBoard[0][i]);
+      }
+      if(i == 3){
+        currPosition.setCollumn(3);
+        PiecesOnBoard[0][3].setPieceType(ChessPiece.PieceType.QUEEN);
+        addPiece(currPosition, PiecesOnBoard[0][i]);
+      }
+      if(i == 4){
+        currPosition.setCollumn(4);
+        PiecesOnBoard[0][4].setPieceType(ChessPiece.PieceType.KING);
+        addPiece(currPosition, PiecesOnBoard[0][i]);
+      }
     }
+    for(int i = 0; i < 8; i++){
+      PiecesOnBoard[1][i].setPieceType(ChessPiece.PieceType.PAWN); //pawns on every spot on row 1
+      currPosition.setCollumn(i); //set the column at i
+      currPosition.setRow(1); //position will be on row 1
+      addPiece(currPosition, PiecesOnBoard[1][i]); //add each piece to the board
+    }
+
+    //Sets the top of the board in the same pattern
+    for(int i = 0; i < 8; i++){
+      currPosition.setRow(7); //starting at the top of the board
+
+      if(i == 0 || i == 7){ //every rook will be on the corner
+        currPosition.setCollumn(i); //set the column to 0 and 7
+        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
+        addPiece(currPosition, PiecesOnBoard[7][i]); //add the piece at column i
+      }
+      if(i == 1 || i == 6){ //Knights are next to the rooks
+        currPosition.setCollumn(i);
+        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.KNIGHT);
+        addPiece(currPosition, PiecesOnBoard[7][i]);
+      }
+      if(i == 2 || i == 5){ //set bishop in between knights
+        currPosition.setCollumn(i);
+        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.BISHOP);
+        addPiece(currPosition, PiecesOnBoard[7][i]);
+      }
+      if(i == 3){
+        currPosition.setCollumn(3);
+        PiecesOnBoard[7][3].setPieceType(ChessPiece.PieceType.QUEEN);
+        addPiece(currPosition, PiecesOnBoard[7][i]);
+      }
+      if(i == 4){
+        currPosition.setCollumn(4);
+        PiecesOnBoard[7][4].setPieceType(ChessPiece.PieceType.KING);
+        addPiece(currPosition, PiecesOnBoard[7][i]);
+      }
+    }
+    for(int i = 0; i < 8; i++){ //Set the pawns
+      PiecesOnBoard[6][i].setPieceType(ChessPiece.PieceType.PAWN); //pawns on every spot on row 6
+      currPosition.setCollumn(i); //set the column at i
+      currPosition.setRow(6); //position will be on row 6
+      addPiece(currPosition, PiecesOnBoard[6][i]); //add each piece to the board
+    }
+
   }
 
 }

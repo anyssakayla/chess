@@ -25,9 +25,22 @@ public interface ChessPiece {
     ChessGame.TeamColor getTeamColor();
 
     /**
+     *
+     * @param teamColor Sets the team color
+     */
+    void setTeamColor(ChessGame.TeamColor teamColor);
+
+    /**
      * @return which type of chess piece this piece is
      */
     PieceType getPieceType();
+
+    /**
+     *
+     * @param pieceType Takes in a pieceType to set it to
+     */
+
+    void setPieceType(PieceType pieceType);
 
     /**
      * Calculates all the positions a chess piece can move to
@@ -35,4 +48,5 @@ public interface ChessPiece {
      * @return Collection of valid moves
      */
     Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition);
+
 }
