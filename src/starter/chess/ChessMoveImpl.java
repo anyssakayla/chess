@@ -7,7 +7,7 @@ public class ChessMoveImpl implements ChessMove{
   ChessPiece.PieceType promotionPiece;
   boolean promotion = false;
 
-  public void ChessMoveImpl(ChessPosition startingPos, ChessPosition endingPos, boolean promotion ){
+  public  ChessMoveImpl(ChessPosition startingPos, ChessPosition endingPos, boolean promotion ){
     this.startingPos = startingPos;
     this.endingPos = endingPos;
     this.promotion = promotion;

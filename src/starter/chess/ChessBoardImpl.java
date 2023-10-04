@@ -4,9 +4,7 @@ import java.util.Map;
 
 public class ChessBoardImpl implements ChessBoard{
 
-  //2d array instead
-  //ArrayList<ArrayList<ChessPiece>> ChessOnBoard;
-  ChessPiece[][] PiecesOnBoard = new ChessPiece[8][8]; //2D array, but how does it use position?
+  ChessPiece[][] PiecesOnBoard = new ChessPiece[7][7]; //2D array of board
 
   @Override
   public void addPiece(ChessPosition position, ChessPiece piece) {//add a piece to the board based on it's position
@@ -14,7 +12,6 @@ public class ChessBoardImpl implements ChessBoard{
     int curColumn = position.getColumn();
     PiecesOnBoard[curRow][curColumn] = piece; //set the piece at the specified row and column
   }
-
   //gets the piece at the indicated position
   @Override
   public ChessPiece getPiece(ChessPosition position) {
@@ -28,11 +25,11 @@ public class ChessBoardImpl implements ChessBoard{
   @Override
   public void resetBoard() { //sets all pieces to their correct positions
 
-    //TODO: Set team colors?
     ChessPositionImpl currPosition = new ChessPositionImpl(); //keeps track of each addition's position
 
     for(int i = 0; i < 8; i++){ //sets the bottom of the board
       currPosition.setRow(0);
+      PiecesOnBoard[0][i].setTeamColor(ChessGame.TeamColor.WHITE); //sets bottom of board to be on White team
       if(i == 0 || i == 7){ //every rook will be on the corner
         currPosition.setCollumn(i); //set the column to 0 and 7
         PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
@@ -69,7 +66,7 @@ public class ChessBoardImpl implements ChessBoard{
     //Sets the top of the board in the same pattern
     for(int i = 0; i < 8; i++){
       currPosition.setRow(7); //starting at the top of the board
-
+      PiecesOnBoard[7][i].setTeamColor(ChessGame.TeamColor.BLACK);
       if(i == 0 || i == 7){ //every rook will be on the corner
         currPosition.setCollumn(i); //set the column to 0 and 7
         PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
