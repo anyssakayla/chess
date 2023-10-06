@@ -34,8 +34,21 @@ public class Rook extends ChessPieceImpl{
           ChessMove backOne = new ChessMoveImpl(chessPosition, backPos, false);
           possibleMoves.add(backOne);
         }
+      }//iterates to the right to end of board
+      ChessPosition rightPos = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() + i);
+      if(rightPos.getColumn() < 8){
+        if(chessBoard.getPiece(rightPos) == null || (chessBoard.getPiece(rightPos).getTeamColor() != this.getTeamColor())){
+          ChessMove rightI = new ChessMoveImpl(chessPosition, rightPos, false);
+          possibleMoves.add(rightI);
+        }
+      }//iterates to the left and to the end of the board
+      ChessPosition leftPos = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() - i);
+      if(rightPos.getColumn() >= 0){
+        if(chessBoard.getPiece(leftPos) == null || (chessBoard.getPiece(leftPos).getTeamColor() != this.getTeamColor())){
+          ChessMove leftI = new ChessMoveImpl(chessPosition, leftPos, false);
+          possibleMoves.add(leftI);
+        }
       }
-      //TODO: Create right and leftPos
     }
     return possibleMoves;
   }
