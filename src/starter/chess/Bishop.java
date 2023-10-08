@@ -18,9 +18,21 @@ public class Bishop extends ChessPieceImpl{
     }
 
     for(int i = 0; i < 8; i++){ //diagonal to the left
-      //row will be incrementing by i
-      //column will be decrementing by i
+      ChessPosition diagLeft = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn() - i);
+      possibleMoves.add(checkMove(chessBoard, chessPosition, diagLeft));
+      //row will be incrementing by i as column will be decrementing by i
     }
+
+    for(int i = 0; i < 8; i++){ //Diagonal down to the left
+      ChessPosition downLeft = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn() - i);
+      possibleMoves.add(checkMove(chessBoard, chessPosition, downLeft));
+    }
+
+    for(int i = 0; i < 8; i++){ //Diagonal down to the right
+      ChessPosition downRight = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn() + i);
+      possibleMoves.add(checkMove(chessBoard, chessPosition, downRight));
+    }
+
     return possibleMoves;
   }
 
