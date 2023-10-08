@@ -85,7 +85,7 @@ public class Pawn extends ChessPieceImpl{
       //  Diagonal to the left
       if(chessBoard.getPiece(diagonalLeft) != null && chessBoard.getPiece(diagonalLeft).getTeamColor() == ChessGame.TeamColor.WHITE) {
         ChessMove diagLMove;
-        //TODO: Implement that it is capturing a black piece
+        //TODO: Implement that it is capturing a white piece
         if(diagonalLeft.getRow() == 0){
           diagLMove = new ChessMoveImpl(chessPosition, diagonalLeft, true);
         }
@@ -97,7 +97,7 @@ public class Pawn extends ChessPieceImpl{
       //  Diagonal to the right
       if(chessBoard.getPiece(diagonalRight) != null && chessBoard.getPiece(diagonalRight).getTeamColor() == ChessGame.TeamColor.WHITE) {
         ChessMove diagRMove; //create a diagonal right move
-        //TODO: Implement that it is capturing a black piece
+        //TODO: Implement that it is capturing a white piece
         if(diagonalRight.getRow() == 0){ //if at end of board, promote
           diagRMove = new ChessMoveImpl(chessPosition, diagonalRight, true); //set the diagonal right move and promotion
         }
@@ -106,10 +106,8 @@ public class Pawn extends ChessPieceImpl{
         }
         possibleMoves.add(diagRMove); //add the diagonal left move to possible moves
       }
-      //TODO:END OF BLACK
+      //TODO:THIS IS THE END OF TEAM BLACK
     }
     return possibleMoves;
   }
 }//check for the end of the board
-//for rook use a loop until stopping point (end of board or a piece in the way)
-//check for not white for king
