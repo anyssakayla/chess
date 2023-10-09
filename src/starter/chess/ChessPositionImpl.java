@@ -9,10 +9,12 @@ public class ChessPositionImpl implements ChessPosition{
     this.collumn = collumn;
   }
 
+  @Override
   public void setRow(int row){
     this.row = row;
   }
 
+  @Override
   public void setCollumn(int collumn){
     this.collumn = collumn;
   }

@@ -13,6 +13,11 @@ public class ChessMoveImpl implements ChessMove{
     promotionPiece = null;
     this.promotion = promotion;
   }
+  public ChessMoveImpl() { //create an empty ChessMove instance
+    startingPos = null;
+    endingPos = null;
+    promotionPiece = null;
+  }
 
   public  ChessMoveImpl(ChessPosition startingPos, ChessPosition endingPos, ChessPiece.PieceType pieceType){
     this.startingPos = startingPos;
@@ -33,8 +38,18 @@ public class ChessMoveImpl implements ChessMove{
   public ChessPiece.PieceType getPromotionPiece() {
     return promotionPiece;
   }
-
+  @Override
   public void setPromotion(ChessPiece.PieceType pieceType){
     promotionPiece = pieceType;
+  }
+
+  @Override
+  public void setStartingPos(ChessPosition startingPos){
+    this.startingPos = startingPos;
+  }
+
+  @Override
+  public void setEndingPos(ChessPosition endingPos){
+    this.endingPos = endingPos;
   }
 }

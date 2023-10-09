@@ -18,6 +18,17 @@ public class ChessBoardImpl implements ChessBoard{
     int curColumn = chessPosition.getColumn();
     PiecesOnBoard[curRow][curColumn] = null;
   }
+
+  @Override
+  public void completesMove(ChessMove chessMove){ //completes the move
+    ChessPiece pieceToMove = getPiece(chessMove.getStartPosition()); //piece to move is at the start position
+    addPiece(chessMove.getEndPosition(), pieceToMove); //put the piece to move at the end position
+    //erasePiece(chessMove.getStartPosition()); //does this one work?
+    addPiece(chessMove.getStartPosition(), null); //set the start piece to null for an empty space on board
+    if(chessMove.getPromotionPiece() != null){
+      pieceToMove.setPieceType(chessMove.getPromotionPiece());
+    }
+  }
   //gets the piece at the indicated position
   @Override
   public ChessPiece getPiece(ChessPosition position) {
@@ -97,6 +108,7 @@ public class ChessBoardImpl implements ChessBoard{
         }
       }
     }
-
   }
+
+
 }

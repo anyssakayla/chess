@@ -16,5 +16,13 @@ public interface ChessPosition {
      */
     int getColumn();
 
+    /**
+     *
+     * @param row is the row to set to
+     */
+    void setRow(int row);
+
+    void setCollumn(int collumn);
+
 
 }

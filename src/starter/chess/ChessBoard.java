@@ -30,4 +30,10 @@ public interface ChessBoard {
      * (How the game of chess normally starts)
      */
     void resetBoard();
+
+    /**
+     *
+     * @param chessMove gives the move to be completed
+     */
+    void completesMove(ChessMove chessMove);
 }
