@@ -12,6 +12,12 @@ public class ChessMoveImpl implements ChessMove{
     this.endingPos = endingPos;
     this.promotion = promotion;
   }
+
+  public  ChessMoveImpl(ChessPosition startingPos, ChessPosition endingPos, ChessPiece.PieceType pieceType){
+    this.startingPos = startingPos;
+    this.endingPos = endingPos;
+    promotionPiece = pieceType; //sets the promotion piece to the one given
+  }
   @Override
   public ChessPosition getStartPosition() { //where move starts from
     return null;

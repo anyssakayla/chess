@@ -50,8 +50,8 @@ public class Queen extends ChessPieceImpl{
     }
 
     for(int i = 0; i < 8; i++){ //Straight down
-      ChessPosition strightDown = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn()); //column stays the same, but row increments up
-      possibleMoves.add(checkMove(chessBoard, chessPosition, strightDown));
+      ChessPosition straightDown = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn()); //column stays the same, but row increments up
+      possibleMoves.add(checkMove(chessBoard, chessPosition, straightDown));
     }
     return possibleMoves;
   }
