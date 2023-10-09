@@ -26,7 +26,7 @@ public class ChessBoardImpl implements ChessBoard{
   public void resetBoard() { //sets all pieces to their correct positions
     ChessGame.TeamColor teamColor = null;
     for(int i = 0; i < 8; i++){ //row
-      for(int j = 0; i < 8; j++){ //column
+      for(int j = 0; j < 8; j++){ //column
         ChessPositionImpl currPosition = new ChessPositionImpl(i,j);
         if(i == 0 || i == 1){ //if in the first two rows, assign to white team
           teamColor = ChessGame.TeamColor.WHITE; //if bottom of board, set to white
