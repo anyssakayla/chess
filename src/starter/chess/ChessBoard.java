@@ -20,6 +20,12 @@ public interface ChessBoard {
     ChessPiece getPiece(ChessPosition position);
 
     /**
+     * erases a chess piece on the chessboard based on position
+     * @param chessPosition The position to erase the piece from
+     */
+    void erasePiece(ChessPosition chessPosition);
+
+    /**
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */

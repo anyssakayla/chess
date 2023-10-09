@@ -12,6 +12,12 @@ public class ChessBoardImpl implements ChessBoard{
     int curColumn = position.getColumn();
     PiecesOnBoard[curRow][curColumn] = piece; //set the piece at the specified row and column
   }
+
+  public void erasePiece(ChessPosition chessPosition){ //erase pieces on the board
+    int curRow = chessPosition.getRow();
+    int curColumn = chessPosition.getColumn();
+    PiecesOnBoard[curRow][curColumn] = null;
+  }
   //gets the piece at the indicated position
   @Override
   public ChessPiece getPiece(ChessPosition position) {
