@@ -24,80 +24,73 @@ public class ChessBoardImpl implements ChessBoard{
 
   @Override
   public void resetBoard() { //sets all pieces to their correct positions
+    ChessGame.TeamColor teamColor = null;
+    for(int i = 0; i < 8; i++){ //row
+      for(int j = 0; i < 8; j++){ //column
+        ChessPositionImpl currPosition = new ChessPositionImpl(i,j);
+        if(i == 0 || i == 1){ //if in the first two rows, assign to white team
+          teamColor = ChessGame.TeamColor.WHITE; //if bottom of board, set to white
+          ChessPiece chessPiece = new ChessPieceImpl(teamColor); //set teamcolor to white
+          if(i == 1){ //if row 1, all are pawns
+            chessPiece.setPieceType(ChessPiece.PieceType.PAWN); //set to white pawns
+            addPiece(currPosition, chessPiece); //adds the piece based on position and piecetype
+          }
+          if(i == 0){ //make sure it is the first row
+            if(j == 0 || j == 7){ //rooks are on 0 and 7
+              chessPiece.setPieceType(ChessPiece.PieceType.ROOK); //set piece to rook
+              addPiece(currPosition, chessPiece); //add the piece
+            }
+            if(j == 1 || j == 6){
+              chessPiece.setPieceType(ChessPiece.PieceType.KNIGHT);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 2 || j == 5){
+              chessPiece.setPieceType(ChessPiece.PieceType.BISHOP);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 4){
+              chessPiece.setPieceType(ChessPiece.PieceType.KING);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 3){
+              chessPiece.setPieceType(ChessPiece.PieceType.QUEEN);
+              addPiece(currPosition, chessPiece);
+            }
+          }
+        }
+        if(i == 6 || i == 7){ //if row 6 or 7, team is black
+          teamColor = ChessGame.TeamColor.BLACK; //if top of board, set to black
+          ChessPiece chessPiece = new ChessPieceImpl(teamColor); //set teamcolor to black
 
-    ChessPositionImpl currPosition = new ChessPositionImpl(0,0); //keeps track of each addition's position
-
-    for(int i = 0; i < 8; i++){ //sets the bottom of the board
-      currPosition.setRow(0);
-      PiecesOnBoard[0][i].setTeamColor(ChessGame.TeamColor.WHITE); //sets bottom of board to be on White team
-      if(i == 0 || i == 7){ //every rook will be on the corner
-        currPosition.setCollumn(i); //set the column to 0 and 7
-        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
-        addPiece(currPosition, PiecesOnBoard[0][i]); //add the piece at column i
+          if(i == 6){ //if row 6, all are pawns
+            chessPiece.setPieceType(ChessPiece.PieceType.PAWN); //set to black pawns
+            addPiece(currPosition, chessPiece); //adds the piece based on position and piecetype
+          }
+          if(i == 7){ //make sure pieces are placed on top row
+            if(j == 0 || j == 7){ //rooks are on 0 and 7
+              chessPiece.setPieceType(ChessPiece.PieceType.ROOK); //set piece to rook
+              addPiece(currPosition, chessPiece); //add the piece
+            }
+            if(j == 1 || j == 6){
+              chessPiece.setPieceType(ChessPiece.PieceType.KNIGHT);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 2 || j == 5){
+              chessPiece.setPieceType(ChessPiece.PieceType.BISHOP);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 4){
+              chessPiece.setPieceType(ChessPiece.PieceType.KING);
+              addPiece(currPosition, chessPiece);
+            }
+            if(j == 3){
+              chessPiece.setPieceType(ChessPiece.PieceType.QUEEN);
+              addPiece(currPosition, chessPiece);
+            }
+          }
+        }
       }
-      if(i == 1 || i == 6){ //Knights are next to the rooks
-        currPosition.setCollumn(i);
-        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.KNIGHT);
-        addPiece(currPosition, PiecesOnBoard[0][i]);
-      }
-      if(i == 2 || i == 5){ //set bishop in between knights
-        currPosition.setCollumn(i);
-        PiecesOnBoard[0][i].setPieceType(ChessPiece.PieceType.BISHOP);
-        addPiece(currPosition, PiecesOnBoard[0][i]);
-      }
-      if(i == 3){
-        currPosition.setCollumn(3);
-        PiecesOnBoard[0][3].setPieceType(ChessPiece.PieceType.QUEEN);
-        addPiece(currPosition, PiecesOnBoard[0][i]);
-      }
-      if(i == 4){
-        currPosition.setCollumn(4);
-        PiecesOnBoard[0][4].setPieceType(ChessPiece.PieceType.KING);
-        addPiece(currPosition, PiecesOnBoard[0][i]);
-      }
-    }
-    for(int i = 0; i < 8; i++){
-      PiecesOnBoard[1][i].setPieceType(ChessPiece.PieceType.PAWN); //pawns on every spot on row 1
-      currPosition.setCollumn(i); //set the column at i
-      currPosition.setRow(1); //position will be on row 1
-      addPiece(currPosition, PiecesOnBoard[1][i]); //add each piece to the board
     }
 
-    //Sets the top of the board in the same pattern
-    for(int i = 0; i < 8; i++){
-      currPosition.setRow(7); //starting at the top of the board
-      PiecesOnBoard[7][i].setTeamColor(ChessGame.TeamColor.BLACK);
-      if(i == 0 || i == 7){ //every rook will be on the corner
-        currPosition.setCollumn(i); //set the column to 0 and 7
-        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.ROOK); //set the piecetype before adding
-        addPiece(currPosition, PiecesOnBoard[7][i]); //add the piece at column i
-      }
-      if(i == 1 || i == 6){ //Knights are next to the rooks
-        currPosition.setCollumn(i);
-        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.KNIGHT);
-        addPiece(currPosition, PiecesOnBoard[7][i]);
-      }
-      if(i == 2 || i == 5){ //set bishop in between knights
-        currPosition.setCollumn(i);
-        PiecesOnBoard[7][i].setPieceType(ChessPiece.PieceType.BISHOP);
-        addPiece(currPosition, PiecesOnBoard[7][i]);
-      }
-      if(i == 3){
-        currPosition.setCollumn(3);
-        PiecesOnBoard[7][3].setPieceType(ChessPiece.PieceType.QUEEN);
-        addPiece(currPosition, PiecesOnBoard[7][i]);
-      }
-      if(i == 4){
-        currPosition.setCollumn(4);
-        PiecesOnBoard[7][4].setPieceType(ChessPiece.PieceType.KING);
-        addPiece(currPosition, PiecesOnBoard[7][i]);
-      }
-    }
-    for(int i = 0; i < 8; i++){ //Set the pawns
-      PiecesOnBoard[6][i].setPieceType(ChessPiece.PieceType.PAWN); //pawns on every spot on row 6
-      currPosition.setCollumn(i); //set the column at i
-      currPosition.setRow(6); //position will be on row 6
-      addPiece(currPosition, PiecesOnBoard[6][i]); //add each piece to the board
-    }
   }
 }

@@ -49,7 +49,7 @@ public class TestFactory {
         return new ChessMoveImpl(startPosition, endPosition, promotionPiece);
         }
       else{
-        return new ChessMoveImpl(startPosition, endPosition, false);
+        return new ChessMoveImpl(startPosition, endPosition, null); //TODO: change to false?
       }
     }
     //------------------------------------------------------------------------------------------------------------------

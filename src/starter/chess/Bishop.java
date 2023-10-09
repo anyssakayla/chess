@@ -40,11 +40,11 @@ public class Bishop extends ChessPieceImpl{
 
     if(endPos.getRow() >= 0 && endPos.getRow() < 8 && endPos.getColumn() >= 0 && endPos.getColumn() < 8){ //checking if end position is in bounds
       if(chessBoard.getPiece(endPos) == null){ //if the spot on the board is empty, move there
-        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, false); //create the move to add
+        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE//create the move to add
         return addMove;
       }
       else if(chessBoard.getPiece(endPos).getTeamColor() != this.getTeamColor()){ //if there is a piece, but it is the other team, it is a valid move
-        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, false); //create the move
+        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE //create the move
         return addMove; //return the move
       }
     }

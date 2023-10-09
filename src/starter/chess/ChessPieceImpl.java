@@ -10,6 +10,10 @@ public class ChessPieceImpl implements ChessPiece{
     teamColor = color;
     this.pieceType = pieceType;
   }
+  public ChessPieceImpl(ChessGame.TeamColor color){
+    teamColor = color;
+
+  }
   @Override
   public ChessGame.TeamColor getTeamColor() {
     return teamColor;

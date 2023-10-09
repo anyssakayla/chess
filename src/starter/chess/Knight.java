@@ -40,11 +40,11 @@ public class Knight extends ChessPieceImpl{
   public ChessMove addingMoves(ChessBoard chessBoard, ChessPosition chessPosition, ChessPosition endPos) { //checks if the move can be added
     if(endPos.getColumn() < 8 && endPos.getColumn() >= 0 && endPos.getRow() < 8 && endPos.getRow() >= 0){ //checking if the end position is in bounds
       if(chessBoard.getPiece(endPos) == null){ //Knight can move if spot is empty
-        ChessMove newMove = new ChessMoveImpl(chessPosition, endPos, false);
+        ChessMove newMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE
         return newMove;
       }
       else if(chessBoard.getPiece(endPos).getTeamColor() != this.getTeamColor()){ //if the piece belongs to the other team, it is a valid move
-        ChessMove newMove = new ChessMoveImpl(chessPosition, endPos, false);
+        ChessMove newMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE
         return newMove;
       }
     }

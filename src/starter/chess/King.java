@@ -66,7 +66,7 @@ public class King extends ChessPieceImpl{
 
   public void whiteKing(Collection<ChessMove> possibleMoves, ChessBoard chessBoard, ChessPosition startingPos, ChessPosition endingPos){
     if((endingPos.getRow() < 8 && endingPos.getRow() >= 0) && (endingPos.getColumn() < 8 && endingPos.getColumn() >= 0)){ //check that the ending position is in bounds of board
-      ChessMove newMove = new ChessMoveImpl(startingPos, endingPos, false); //create a move from starting and ending positions
+      ChessMove newMove = new ChessMoveImpl(startingPos, endingPos, null); // TODO: PUT FALSE BACK //create a move from starting and ending positions
       if(chessBoard.getPiece(endingPos) == null){
         possibleMoves.add(newMove); //add the new move to possibleMoves
       }
@@ -79,7 +79,7 @@ public class King extends ChessPieceImpl{
 
   public void blackKing(Collection<ChessMove> possibleMoves, ChessBoard chessBoard, ChessPosition startingPos, ChessPosition endingPos){
     if((endingPos.getRow() < 8 && endingPos.getRow() >= 0) && (endingPos.getColumn() < 8 && endingPos.getColumn() >= 0)){ //check that the ending position is in bounds of board
-      ChessMove newMove = new ChessMoveImpl(startingPos, endingPos, false); //create a move from starting and ending positions
+      ChessMove newMove = new ChessMoveImpl(startingPos, endingPos, null); //TODO: FALSE //create a move from starting and ending positions
       if(chessBoard.getPiece(endingPos) == null){
         possibleMoves.add(newMove); //add the new move to possibleMoves
       }
