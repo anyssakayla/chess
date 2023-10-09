@@ -10,6 +10,7 @@ public class ChessMoveImpl implements ChessMove{
   public  ChessMoveImpl(ChessPosition startingPos, ChessPosition endingPos, boolean promotion ){
     this.startingPos = startingPos;
     this.endingPos = endingPos;
+    promotionPiece = null;
     this.promotion = promotion;
   }
 

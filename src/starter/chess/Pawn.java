@@ -97,7 +97,7 @@ public class Pawn extends ChessPieceImpl{
       //  Diagonal to the right
       if(chessBoard.getPiece(diagonalRight) != null && chessBoard.getPiece(diagonalRight).getTeamColor() == ChessGame.TeamColor.WHITE) {
         ChessMove diagRMove; //create a diagonal right move
-        //TODO: Implement that it is capturing a white piece
+        //TODO: Implement that it is capturing a white piece?
         if(diagonalRight.getRow() == 0){ //if at end of board, promote
           diagRMove = new ChessMoveImpl(chessPosition, diagonalRight, true); //set the diagonal right move and promotion
         }

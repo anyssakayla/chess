@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ChessBoardImpl implements ChessBoard{
 
-  ChessPiece[][] PiecesOnBoard = new ChessPiece[7][7]; //2D array of board
+  ChessPiece[][] PiecesOnBoard = new ChessPiece[8][8]; //2D array of board
 
   @Override
   public void addPiece(ChessPosition position, ChessPiece piece) {//add a piece to the board based on it's position
