@@ -8,47 +8,87 @@ public class Rook extends ChessPieceImpl{
     super(teamColor, PieceType.ROOK);
   }
 
-  public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) { //possible moves
+  boolean hasBeenCaptured = false;
+  @Override
+  public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
     Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
-    for(int i = 0; i < 8; i++){ //loop through all possible iterations of the length a rook can go
-      ChessPosition forwardPos = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn()); //increment row by i
-      if(forwardPos.getRow() < 8){ //make sure it is still in bounds
-        if(chessBoard.getPiece(forwardPos) == null){
-          ChessMove forwardOne = new ChessMoveImpl(chessPosition, forwardPos, null); //TODO: FALSE
-          possibleMoves.add(forwardOne);
+    //Rook moves in straight lines in all directions
+    for(int i = 1; i < 8; i++){ //Straight up
+      ChessPosition straightUp = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn()); //column stays the same, but row increments up
+      if(checkMove(chessBoard, chessPosition, straightUp) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, straightUp));
+        if(hasBeenCaptured == true){ //if one of the moves captures a piece, you can't go any further than that
+          hasBeenCaptured = false; //reset the boolean for the next diagonal iteration
+          break; //there are no more possible moves, so break out of loop
         }
-        else if (chessBoard.getPiece(forwardPos).getTeamColor() != this.getTeamColor()){ //check if the team color is different
-          ChessMove forwardOne = new ChessMoveImpl(chessPosition, forwardPos, null); //TODO: FALSE
-          possibleMoves.add(forwardOne);
+      }
+      else {
+        break;
+      }
+    }
+
+    for(int i = 1; i < 8; i++){ //Straight right
+      ChessPosition straightRight = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() + i);
+      if(checkMove(chessBoard, chessPosition, straightRight) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, straightRight));
+        if(hasBeenCaptured == true){ //if one of the moves captures a piece, you can't go any further than that
+          hasBeenCaptured = false; //reset the boolean for the next diagonal iteration
+          break; //there are no more possible moves, so break out of loop
         }
-      } //Rook iterates backwards to end of board
-      ChessPosition backPos = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn()); //decrement by i
-      if(backPos.getRow() >= 0){
-        if(chessBoard.getPiece(backPos) == null){
-          ChessMove backOne = new ChessMoveImpl(chessPosition, backPos, null); //TODO: FALSE
-          possibleMoves.add(backOne); //if we pass in start, endposition, and possibleMoves, could make function to do this
+      }
+      else {
+        break;
+      }
+    }
+
+    for(int i = 1; i < 8; i++){ //Straight left
+      ChessPosition straightLeft = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() - i);
+      if(checkMove(chessBoard, chessPosition, straightLeft) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, straightLeft));
+        if(hasBeenCaptured == true){ //if one of the moves captures a piece, you can't go any further than that
+          hasBeenCaptured = false; //reset the boolean for the next diagonal iteration
+          break; //there are no more possible moves, so break out of loop
         }
-        else if(chessBoard.getPiece(backPos).getTeamColor() != this.getTeamColor()){
-          ChessMove backOne = new ChessMoveImpl(chessPosition, backPos, null); //TODO: FALSE
-          possibleMoves.add(backOne);
+      }
+      else {
+        break;
+      }
+    }
+
+    for(int i = 1; i < 8; i++){ //Straight down
+      ChessPosition straightDown = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn());
+      if(checkMove(chessBoard, chessPosition, straightDown) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, straightDown));
+        if(hasBeenCaptured == true){ //if one of the moves captures a piece, you can't go any further than that
+          hasBeenCaptured = false; //reset the boolean for the next diagonal iteration
+          break; //there are no more possible moves, so break out of loop
         }
-      }//iterates to the right to end of board
-      ChessPosition rightPos = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() + i);
-      if(rightPos.getColumn() < 8){
-        if(chessBoard.getPiece(rightPos) == null || (chessBoard.getPiece(rightPos).getTeamColor() != this.getTeamColor())){
-          ChessMove rightI = new ChessMoveImpl(chessPosition, rightPos, null); //TODO: FALSE
-          possibleMoves.add(rightI);
-        }
-      }//iterates to the left and to the end of the board
-      ChessPosition leftPos = new ChessPositionImpl(chessPosition.getRow(), chessPosition.getColumn() - i);
-      if(rightPos.getColumn() >= 0){
-        if(chessBoard.getPiece(leftPos) == null || (chessBoard.getPiece(leftPos).getTeamColor() != this.getTeamColor())){
-          ChessMove leftI = new ChessMoveImpl(chessPosition, leftPos, null); //TODO: FALSE
-          possibleMoves.add(leftI);
-        }
+      }
+      else {
+        break;
       }
     }
     return possibleMoves;
+  }
+
+  public ChessMove checkMove(ChessBoard chessBoard, ChessPosition chessPosition, ChessPosition endPos){
+
+    if(endPos.getRow() >= 0 && endPos.getRow() < 8 && endPos.getColumn() >= 0 && endPos.getColumn() < 8){ //checking if end position is in bounds
+      if(chessBoard.getPiece(endPos) == null){ //if the spot on the board is empty, move there
+        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE BACK//create the move to add
+        return addMove;
+      }
+      else if(chessBoard.getPiece(endPos).getTeamColor() != this.getTeamColor()){ //if there is a piece, but it is the other team, it is a valid move
+        ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE //create the move
+        setCaptured(true);
+        return addMove; //return the move
+      }
+    }
+    return null; //if the move doesn't meet criteria, return null
+  }
+
+  public void setCaptured(boolean captured){ //used to see if a piece has been captured within the added moves
+    hasBeenCaptured = captured;
   }
 }
