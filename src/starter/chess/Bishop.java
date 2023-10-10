@@ -8,29 +8,67 @@ public class Bishop extends ChessPieceImpl{
     super(teamColor, PieceType.BISHOP);
   }
 
+  boolean hasBeenCaptured = false;
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
     Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
-    for(int i = 0; i < 8; i++){ //increment to the right diagonal
+    for(int i = 1; i < 8; i++){ //increment to the right diagonal, i starts at 1 since 0 won't increment anything
       ChessPosition diagRight = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn() + i);
-      possibleMoves.add(checkMove(chessBoard, chessPosition, diagRight));
-    }
 
-    for(int i = 0; i < 8; i++){ //diagonal to the left
+      if(checkMove(chessBoard, chessPosition, diagRight) != null) { //if there is a move to add, add the move
+        possibleMoves.add(checkMove(chessBoard, chessPosition, diagRight));
+        if(hasBeenCaptured == true){ //if one of the moves captures a piece, you can't go any further than that
+          hasBeenCaptured = false; //reset the boolean for the next diagonal iteration
+          break; //there are no more possible moves, so break out of loop
+        }
+      }
+      else{ //if one move doesn't pass requirements, don't look for other ones past this spot
+        break;
+      }
+    } //
+
+    for(int i = 1; i < 8; i++){ //diagonal to the left
       ChessPosition diagLeft = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn() - i);
-      possibleMoves.add(checkMove(chessBoard, chessPosition, diagLeft));
+      if(checkMove(chessBoard, chessPosition, diagLeft) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, diagLeft));
+        if(hasBeenCaptured == true){
+          hasBeenCaptured = false; //reset boolean and then break
+          break;
+        }
+      }
+      else{
+        break;
+      }
       //row will be incrementing by i as column will be decrementing by i
     }
 
-    for(int i = 0; i < 8; i++){ //Diagonal down to the left
+    for(int i = 1; i < 8; i++){ //Diagonal down to the left
       ChessPosition downLeft = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn() - i);
-      possibleMoves.add(checkMove(chessBoard, chessPosition, downLeft));
+      if(checkMove(chessBoard, chessPosition, downLeft) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, downLeft));
+        if(hasBeenCaptured == true){
+          hasBeenCaptured = false;
+          break;
+        }
+      }
+      else {
+        break; //if one move doesn't pass requirements, don't look for other ones past this spot
+      }
     }
 
-    for(int i = 0; i < 8; i++){ //Diagonal down to the right
+    for(int i = 1; i < 8; i++){ //Diagonal down to the right
       ChessPosition downRight = new ChessPositionImpl(chessPosition.getRow() - i, chessPosition.getColumn() + i);
-      possibleMoves.add(checkMove(chessBoard, chessPosition, downRight));
+      if(checkMove(chessBoard, chessPosition, downRight) != null) {
+        possibleMoves.add(checkMove(chessBoard, chessPosition, downRight));
+        if(hasBeenCaptured == true){
+          hasBeenCaptured = false;
+          break;
+        }
+      }
+      else{
+        break;
+      }
     }
 
     return possibleMoves;
@@ -45,9 +83,16 @@ public class Bishop extends ChessPieceImpl{
       }
       else if(chessBoard.getPiece(endPos).getTeamColor() != this.getTeamColor()){ //if there is a piece, but it is the other team, it is a valid move
         ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE //create the move
-        return addMove; //return the move
+        //addMove.setPromotion(PieceType.BISHOP);
+        setCaptured(true);
+        return addMove; //return the move //save the chessBoard.getPiece(endPos).getType? into something to show captured pieces?
       }
     }
     return null; //if the move doesn't meet criteria, return null
+  }
+
+  public void setCaptured(boolean captured){
+    hasBeenCaptured = captured;
+    //return captured;
   }
 }
