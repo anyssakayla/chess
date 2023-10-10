@@ -83,7 +83,6 @@ public class Bishop extends ChessPieceImpl{
       }
       else if(chessBoard.getPiece(endPos).getTeamColor() != this.getTeamColor()){ //if there is a piece, but it is the other team, it is a valid move
         ChessMove addMove = new ChessMoveImpl(chessPosition, endPos, null); //TODO: FALSE //create the move
-        //addMove.setPromotion(PieceType.BISHOP);
         setCaptured(true);
         return addMove; //return the move //save the chessBoard.getPiece(endPos).getType? into something to show captured pieces?
       }
