@@ -28,16 +28,16 @@ public class ChessGameImpl implements ChessGame{
     ChessMove tempMove = new ChessMoveImpl(); //temp move will be used to make a move and check if it is valid for inCheck
     ChessPiece capture;
     for(ChessMove chessMove : possMoves){
-      tempMove.setStartingPos(chessMove.getEndPosition());
+      tempMove.setStartingPos(chessMove.getEndPosition()); //temp move will unto the move for checking
       tempMove.setEndingPos(chessMove.getStartPosition());
       tempMove.setPromotion(currPiece.getPieceType());
 
       capture = chessBoard.getPiece(chessMove.getEndPosition()); //pass in the piece that is captured
-      chessBoard.completesMove(chessMove);
+      chessBoard.completesMove(chessMove); //complete move and check if it is in check
       if(!isInCheck(currPiece.getTeamColor())){ //if it is not in check, add the move to legal moves
         legalMoves.add(chessMove);
       }
-      chessBoard.completesMove(tempMove);
+      chessBoard.completesMove(tempMove); //undo the move with the temporary move and set it back
       chessBoard.addPiece(chessMove.getEndPosition(), capture);
     }
     return legalMoves;
@@ -129,7 +129,7 @@ public class ChessGameImpl implements ChessGame{
   }
 
   @Override
-  public boolean isInStalemate(TeamColor teamColor) {
+  public boolean isInStalemate(TeamColor teamColor) { //checks if a team has any legal moves available
     Collection<ChessMove> teamMoves;
     ChessPosition position = new ChessPositionImpl(0, 0);
     if(isInCheck(teamColor)){
