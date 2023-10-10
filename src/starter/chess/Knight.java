@@ -12,28 +12,44 @@ public class Knight extends ChessPieceImpl{
     Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
     ChessPosition upLeft = new ChessPositionImpl(chessPosition.getRow() + 2, chessPosition.getColumn() - 1);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, upLeft));
+    if(addingMoves(chessBoard, chessPosition, upLeft) != null){ //needs to check if it is null, so it doesn't add null elements to possibleMoves
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, upLeft));
+    }
 
     ChessPosition upRight = new ChessPositionImpl(chessPosition.getRow() + 2, chessPosition.getColumn() + 1);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, upRight));
+    if(addingMoves(chessBoard, chessPosition, upRight) != null){
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, upRight));
+    }
 
     ChessPosition leftLeft = new ChessPositionImpl(chessPosition.getRow() - 1, chessPosition.getColumn() - 2);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, leftLeft));
+    if(addingMoves(chessBoard, chessPosition, leftLeft) != null){
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, leftLeft));
+    }
 
     ChessPosition leftRight = new ChessPositionImpl(chessPosition.getRow() + 1, chessPosition.getColumn() - 2);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, leftRight));
+    if(addingMoves(chessBoard, chessPosition, leftRight) != null) {
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, leftRight));
+    }
 
     ChessPosition downLeft = new ChessPositionImpl(chessPosition.getRow() - 2, chessPosition.getColumn() - 1);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, downLeft));
+    if(addingMoves(chessBoard, chessPosition, downLeft) != null) {
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, downLeft));
+    }
 
     ChessPosition downRight = new ChessPositionImpl(chessPosition.getRow() - 2, chessPosition.getColumn() + 1);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, downRight));
+    if(addingMoves(chessBoard, chessPosition, downRight) != null) {
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, downRight));
+    }
 
     ChessPosition rightLeft = new ChessPositionImpl(chessPosition.getRow() + 1, chessPosition.getColumn() + 2);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, rightLeft));
+    if(addingMoves(chessBoard, chessPosition, rightLeft) != null) {
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, rightLeft));
+    }
 
     ChessPosition rightRight = new ChessPositionImpl(chessPosition.getRow() - 1, chessPosition.getColumn() + 2);
-    possibleMoves.add(addingMoves(chessBoard, chessPosition, rightRight));
+    if(addingMoves(chessBoard, chessPosition, rightRight) != null) {
+      possibleMoves.add(addingMoves(chessBoard, chessPosition, rightRight));
+    }
 
     return possibleMoves;
   }
