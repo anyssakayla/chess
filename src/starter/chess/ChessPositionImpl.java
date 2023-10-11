@@ -31,24 +31,6 @@ public class ChessPositionImpl implements ChessPosition{
     return collumn;
   }
 
-//  @Override
-//  public boolean equals(Object obj) {
-//    if(obj == null){
-//      return false;
-//    }
-//    if(obj.getClass() != this.getClass()){
-//      return false;
-//    }
-//    ChessPositionImpl objPos = (ChessPositionImpl) obj;
-//    if(objPos.getRow() != this.getRow()){
-//      return false;
-//    }
-//    if(objPos.getColumn() != this.getColumn()){
-//      return false;
-//    }
-//    return true;
-//  }
-
 
   @Override
   public boolean equals(Object o) {

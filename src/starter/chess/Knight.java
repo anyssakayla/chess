@@ -6,10 +6,13 @@ public class Knight extends ChessPieceImpl{
   public Knight(ChessGame.TeamColor teamColor){
     super(teamColor, PieceType.KNIGHT);
   }
+  Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
+  public Collection<ChessMove> returnMoves(){
+    return possibleMoves;
+  } //returns all moves in possibleMoves
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
-    Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
     ChessPosition upLeft = new ChessPositionImpl(chessPosition.getRow() + 2, chessPosition.getColumn() - 1);
     if(addingMoves(chessBoard, chessPosition, upLeft) != null){ //needs to check if it is null, so it doesn't add null elements to possibleMoves

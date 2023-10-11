@@ -7,11 +7,15 @@ public class Bishop extends ChessPieceImpl{
   public Bishop(ChessGame.TeamColor teamColor){
     super(teamColor, PieceType.BISHOP);
   }
-
+  Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
   boolean hasBeenCaptured = false;
+
+  public Collection<ChessMove> returnMoves(){
+    return possibleMoves;
+  } //returns all moves in possibleMoves
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
-    Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
+
 
     for(int i = 1; i < 8; i++){ //increment to the right diagonal, i starts at 1 since 0 won't increment anything
       ChessPosition diagRight = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn() + i);

@@ -20,25 +20,26 @@ public class ChessGameImpl implements ChessGame{
   @Override
   public Collection<ChessMove> validMoves(ChessPosition startPosition) {
 
-    //ChessPosition chessPosition = new ChessPositionImpl();
     ChessPiece currPiece = chessBoard.getPiece(startPosition); //set current piece to the starting position
-    Collection<ChessMove> possMoves = new HashSet<ChessMove>(); //all possible moves
+    Collection<ChessMove> possMoves = currPiece.pieceMoves(chessBoard, startPosition); //all possible moves
     Collection<ChessMove> legalMoves = new HashSet<ChessMove>(); //only moves that are legal
 
     ChessMove tempMove = new ChessMoveImpl(); //temp move will be used to make a move and check if it is valid for inCheck
-    ChessPiece capture;
-    for(ChessMove chessMove : possMoves){
-      tempMove.setStartingPos(chessMove.getEndPosition()); //temp move will unto the move for checking
-      tempMove.setEndingPos(chessMove.getStartPosition());
-      tempMove.setPromotion(currPiece.getPieceType());
+    ChessPiece capture; //can get captured
+    if(possMoves != null && possMoves.size() != 0) { //if it is not empty, iterate through
+      for (ChessMove chessMove : possMoves) { //TODO: DELETE THIS, TRYING TO ITERATE THROUGH SOMETHING THAT IS NULL
+        tempMove.setStartingPos(chessMove.getEndPosition()); //temp move will unto the move for checking
+        tempMove.setEndingPos(chessMove.getStartPosition());
+        tempMove.setPromotion(currPiece.getPieceType());
 
-      capture = chessBoard.getPiece(chessMove.getEndPosition()); //pass in the piece that is captured
-      chessBoard.completesMove(chessMove); //complete move and check if it is in check
-      if(!isInCheck(currPiece.getTeamColor())){ //if it is not in check, add the move to legal moves
-        legalMoves.add(chessMove);
+        capture=chessBoard.getPiece(chessMove.getEndPosition()); //pass in the piece that is captured
+        chessBoard.completesMove(chessMove); //complete move and check if it is in check
+        if (!isInCheck(currPiece.getTeamColor())) { //if it is not in check, add the move to legal moves
+          legalMoves.add(chessMove);
+        }
+        chessBoard.completesMove(tempMove); //undo the move with the temporary move and set it back
+        chessBoard.addPiece(chessMove.getEndPosition(), capture);
       }
-      chessBoard.completesMove(tempMove); //undo the move with the temporary move and set it back
-      chessBoard.addPiece(chessMove.getEndPosition(), capture);
     }
     return legalMoves;
   }
@@ -50,6 +51,9 @@ public class ChessGameImpl implements ChessGame{
         throw new InvalidMoveException("This piece does not belong to the playing team");
       }
     }
+//    if(validMoves(move.getStartPosition()).isEmpty()){ //if validMoves is empty, then there are no moves to make
+//      throw new InvalidMoveException("This move is not valid for the indicated piece");
+//    }
     Collection<ChessMove> legalMoves = validMoves(move.getStartPosition()); //put all valid moves into a collection of legal moves
     if(!legalMoves.contains(move)){ //if the move is not legal, throw exception
       throw new InvalidMoveException("This move is not valid for the indicated piece");
@@ -59,7 +63,7 @@ public class ChessGameImpl implements ChessGame{
       setTeamTurn(TeamColor.BLACK);
     }
     else{
-      setTeamTurn(TeamColor.BLACK);
+      setTeamTurn(TeamColor.WHITE);
     }
 
   }
@@ -70,7 +74,7 @@ public class ChessGameImpl implements ChessGame{
     ChessPosition position = new ChessPositionImpl(0, 0);
     ChessPosition kingPos = new ChessPositionImpl(0, 0);
 
-    for(int i = 0; i < 8; i ++){
+    for(int i = 0; i < 8; i ++){ //gets the king's position for the indicated team
       for(int j = 0; j < 8; j++){
         position.setRow(i);
         position.setCollumn(j);
@@ -95,6 +99,9 @@ public class ChessGameImpl implements ChessGame{
               if(move.getEndPosition().equals(kingPos)){ //if they can have a move that equals the king's position
                 return true;
               }
+//              else {
+//                return false;
+//              }
             }
           }
         }

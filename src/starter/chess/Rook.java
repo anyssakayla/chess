@@ -7,11 +7,15 @@ public class Rook extends ChessPieceImpl{
   public Rook(ChessGame.TeamColor teamColor){
     super(teamColor, PieceType.ROOK);
   }
-
+  Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
   boolean hasBeenCaptured = false;
+  public Collection<ChessMove> returnMoves(){
+    return possibleMoves;
+  }
+
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
-    Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
+
 
     //Rook moves in straight lines in all directions
     for(int i = 1; i < 8; i++){ //Straight up

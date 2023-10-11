@@ -7,9 +7,12 @@ public class King extends ChessPieceImpl{
   public King(ChessGame.TeamColor teamColor){
     super(teamColor, PieceType.KING);
   }
+  Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
+  public Collection<ChessMove> returnMoves(){
+    return possibleMoves;
+  }
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) { //possible moves
-    Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
     if (teamColor == ChessGame.TeamColor.WHITE) {
       ChessPosition forwardOne = new ChessPositionImpl(chessPosition.getRow() + 1, chessPosition.getColumn()); //create a position at forward one spot

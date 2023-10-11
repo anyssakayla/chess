@@ -7,11 +7,15 @@ public class Queen extends ChessPieceImpl{
   public Queen(ChessGame.TeamColor teamColor){
     super(teamColor, PieceType.QUEEN);
   }
-
+  Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
   boolean hasBeenCaptured = false;
+
+  public Collection<ChessMove> returnMoves(){
+    return possibleMoves;
+  }
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
-    Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
+
 
     //Diagonal Moves
     for(int i = 1; i < 8; i++){ //increment to the right diagonal, i starts at 1 since 0 won't increment anything

@@ -28,12 +28,12 @@ public class ChessMoveImpl implements ChessMove{
   }
   @Override
   public ChessPosition getStartPosition() { //where move starts from
-    return null;
+    return startingPos;
   }
 
   @Override
   public ChessPosition getEndPosition() {
-    return null;
+    return endingPos;
   }
 
   @Override
@@ -55,27 +55,6 @@ public class ChessMoveImpl implements ChessMove{
     this.endingPos = endingPos;
   }
 
-
-//  @Override
-//  public boolean equals(Object obj) {
-//    if(obj == null){
-//      return false;
-//    }
-//    if(obj.getClass() != this.getClass()){
-//      return false;
-//    }
-//    ChessMoveImpl objMove = (ChessMoveImpl) obj;
-////    if(objMove.getStartPosition() != this.getStartPosition()){
-////      return false;
-////    }
-//    if (!objMove.getStartPosition().equals(this.getStartPosition())) {
-//      return false;
-//    }
-//    if (!objMove.getEndPosition().equals(this.getEndPosition())) {
-//      return false;
-//    }
-//    return true;
-//  }
 
   @Override
   public boolean equals(Object o) {

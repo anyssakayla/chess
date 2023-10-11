@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 public class ChessPieceImpl implements ChessPiece{
   public ChessGame.TeamColor teamColor = null;
@@ -34,6 +35,37 @@ public class ChessPieceImpl implements ChessPiece{
 
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
+    Collection<ChessMove> currentPieceMoves;
+    if(pieceType == PieceType.PAWN){
+      Pawn piece = new Pawn(teamColor);
+      currentPieceMoves = piece.returnMoves(board, myPosition);
+      return currentPieceMoves;
+    }
+    if(pieceType == PieceType.BISHOP){
+      Bishop piece = new Bishop(teamColor);
+      currentPieceMoves = piece.returnMoves();
+      return currentPieceMoves;
+    }
+    if(pieceType == PieceType.KING){
+      King piece = new King(teamColor);
+      currentPieceMoves = piece.returnMoves();
+      return currentPieceMoves;
+    }
+    if(pieceType == PieceType.KNIGHT){
+      Knight piece = new Knight(teamColor);
+      currentPieceMoves = piece.returnMoves();
+      return currentPieceMoves;
+    }
+    if(pieceType == PieceType.QUEEN){
+      Queen piece = new Queen(teamColor);
+      currentPieceMoves = piece.returnMoves();
+      return currentPieceMoves;
+    }
+    if(pieceType == PieceType.ROOK){
+      Rook piece = new Rook(teamColor);
+      currentPieceMoves = piece.returnMoves();
+      return currentPieceMoves;
+    }
     return null;
   }
 }
