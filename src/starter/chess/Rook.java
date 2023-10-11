@@ -18,7 +18,7 @@ public class Rook extends ChessPieceImpl{
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
 
-
+    possibleMoves.clear();
     //Rook moves in straight lines in all directions
     for(int i = 1; i < 8; i++){ //Straight up
       ChessPosition straightUp = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn()); //column stays the same, but row increments up

@@ -14,7 +14,7 @@ public class Knight extends ChessPieceImpl{
   } //returns all moves in possibleMoves
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
-
+    possibleMoves.clear(); //everytime pieceMoves is called, we want to create a new list of possible moves
     ChessPosition upLeft = new ChessPositionImpl(chessPosition.getRow() + 2, chessPosition.getColumn() - 1);
     if(addingMoves(chessBoard, chessPosition, upLeft) != null){ //needs to check if it is null, so it doesn't add null elements to possibleMoves
       possibleMoves.add(addingMoves(chessBoard, chessPosition, upLeft));

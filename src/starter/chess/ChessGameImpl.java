@@ -35,7 +35,7 @@ public class ChessGameImpl implements ChessGame{
         capture=chessBoard.getPiece(chessMove.getEndPosition()); //pass in the piece that is captured
         chessBoard.completesMove(chessMove); //complete move and check if it is in check
         if (!isInCheck(currPiece.getTeamColor())) { //if it is not in check, add the move to legal moves
-          legalMoves.add(chessMove);
+          legalMoves.add(chessMove); //TODO: SHOULD ISINCHECK RESET POSSIBLEMOVES?
         }
         chessBoard.completesMove(tempMove); //undo the move with the temporary move and set it back
         chessBoard.addPiece(chessMove.getEndPosition(), capture);
@@ -73,7 +73,7 @@ public class ChessGameImpl implements ChessGame{
     Collection<ChessMove> teamMoves;
     ChessPosition position = new ChessPositionImpl(0, 0);
     ChessPosition kingPos = new ChessPositionImpl(0, 0);
-
+    //TODO: Change kingPos declaration to be at 0,0, as it may not be there, set to null?
     for(int i = 0; i < 8; i ++){ //gets the king's position for the indicated team
       for(int j = 0; j < 8; j++){
         position.setRow(i);
@@ -83,6 +83,7 @@ public class ChessGameImpl implements ChessGame{
             if(chessBoard.getPiece(position).getTeamColor() == teamColor){ //if it is equal to this team's color, it is the king we are looking for
               kingPos.setRow(i);
               kingPos.setCollumn(j);
+              break; //break from loop if already found the king
             }
           }
         }
@@ -92,17 +93,19 @@ public class ChessGameImpl implements ChessGame{
       for (int j = 0; j < 8; j++){
         position.setRow(i); //set the row anc column to i and j
         position.setCollumn(j);
-        if(chessBoard.getPiece(position) != null){ //if there is a piece at position
-          if(chessBoard.getPiece(position).getTeamColor() != teamColor){ //if piece is from opposite team
-            teamMoves = chessBoard.getPiece(position).pieceMoves(chessBoard, position); //call the piece's pieceMoves
-            for(ChessMove move : teamMoves){
-              if(move.getEndPosition().equals(kingPos)){ //if they can have a move that equals the king's position
-                return true;
-              }
+        if(chessBoard.getPiece(position) != null) { //if there is a piece at position
+//          if (chessBoard.getPiece(position).getPieceType() == ChessPiece.PieceType.KING) {
+            if (chessBoard.getPiece(position).getTeamColor() != teamColor) { //if piece is from opposite team
+              teamMoves=chessBoard.getPiece(position).pieceMoves(chessBoard, position); //call the piece's pieceMoves
+              for (ChessMove move : teamMoves) {
+                if (move.getEndPosition().equals(kingPos)) { //if they can have a move that equals the king's position
+                  return true;
+                }
 //              else {
 //                return false;
 //              }
-            }
+              }
+//            }
           }
         }
       }

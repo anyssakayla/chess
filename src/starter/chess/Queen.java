@@ -17,7 +17,7 @@ public class Queen extends ChessPieceImpl{
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
 
-
+    possibleMoves.clear();
     //Diagonal Moves
     for(int i = 1; i < 8; i++){ //increment to the right diagonal, i starts at 1 since 0 won't increment anything
       ChessPosition diagRight = new ChessPositionImpl(chessPosition.getRow() + i, chessPosition.getColumn() + i); //creates a position to be checked for a possible Move

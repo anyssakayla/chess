@@ -14,7 +14,7 @@ public class King extends ChessPieceImpl{
     return possibleMoves;
   }
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) { //possible moves
-
+    possibleMoves.clear();
     if (teamColor == ChessGame.TeamColor.WHITE) {
       ChessPosition forwardOne = new ChessPositionImpl(chessPosition.getRow() + 1, chessPosition.getColumn()); //create a position at forward one spot
       whiteKing(possibleMoves, chessBoard, chessPosition, forwardOne); //moving the white king forward spot
