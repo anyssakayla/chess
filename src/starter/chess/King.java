@@ -9,7 +9,8 @@ public class King extends ChessPieceImpl{
   }
   Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
 
-  public Collection<ChessMove> returnMoves(){
+  public Collection<ChessMove> returnMoves(ChessBoard chessBoard, ChessPosition chessPosition){
+    pieceMoves(chessBoard, chessPosition);
     return possibleMoves;
   }
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) { //possible moves

@@ -9,7 +9,9 @@ public class Rook extends ChessPieceImpl{
   }
   Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
   boolean hasBeenCaptured = false;
-  public Collection<ChessMove> returnMoves(){
+
+  public Collection<ChessMove> returnMoves(ChessBoard chessBoard, ChessPosition chessPosition){
+    pieceMoves(chessBoard, chessPosition);
     return possibleMoves;
   }
 

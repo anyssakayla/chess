@@ -43,27 +43,27 @@ public class ChessPieceImpl implements ChessPiece{
     }
     if(pieceType == PieceType.BISHOP){
       Bishop piece = new Bishop(teamColor);
-      currentPieceMoves = piece.returnMoves();
+      currentPieceMoves = piece.returnMoves(board, myPosition);
       return currentPieceMoves;
     }
     if(pieceType == PieceType.KING){
       King piece = new King(teamColor);
-      currentPieceMoves = piece.returnMoves();
+      currentPieceMoves = piece.returnMoves(board, myPosition);
       return currentPieceMoves;
     }
     if(pieceType == PieceType.KNIGHT){
       Knight piece = new Knight(teamColor);
-      currentPieceMoves = piece.returnMoves();
+      currentPieceMoves = piece.returnMoves(board, myPosition);
       return currentPieceMoves;
     }
     if(pieceType == PieceType.QUEEN){
       Queen piece = new Queen(teamColor);
-      currentPieceMoves = piece.returnMoves();
+      currentPieceMoves = piece.returnMoves(board, myPosition);
       return currentPieceMoves;
     }
     if(pieceType == PieceType.ROOK){
       Rook piece = new Rook(teamColor);
-      currentPieceMoves = piece.returnMoves();
+      currentPieceMoves = piece.returnMoves(board,myPosition);
       return currentPieceMoves;
     }
     return null;

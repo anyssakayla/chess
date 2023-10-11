@@ -10,9 +10,10 @@ public class Bishop extends ChessPieceImpl{
   Collection<ChessMove> possibleMoves = new HashSet<ChessMove>();
   boolean hasBeenCaptured = false;
 
-  public Collection<ChessMove> returnMoves(){
+  public Collection<ChessMove> returnMoves(ChessBoard chessBoard, ChessPosition chessPosition){
+    pieceMoves(chessBoard, chessPosition);
     return possibleMoves;
-  } //returns all moves in possibleMoves
+  }//returns all moves in possibleMoves
   @Override
   public Collection<ChessMove> pieceMoves(ChessBoard chessBoard, ChessPosition chessPosition) {
 
