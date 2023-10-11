@@ -21,19 +21,20 @@ public class Pawn extends ChessPieceImpl{
     possibleMoves.clear();
     if (teamColor == ChessGame.TeamColor.WHITE) { //Team white
       ChessPosition forwardOne=new ChessPositionImpl(chessPosition.getRow() + 1, chessPosition.getColumn()); //create a position at forward one spot
-      if (chessBoard.getPiece(forwardOne) == null) { //checks if the spot at forwardOne position is empty
-        ChessMove f1Move;
-        if (forwardOne.getRow() == 7) { //check if it is at last row for promotion
-          //f1Move = new ChessMoveImpl(chessPosition, forwardOne, true); //promote true and create the forward1 move
-          possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.BISHOP)); //add promotion pieces to possible moves
-          possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.QUEEN));
-          possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.KNIGHT));
-          possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.ROOK));
-        } else {
-          f1Move=new ChessMoveImpl(chessPosition, forwardOne, false); //if can't be promoted, create a move where it is not promoted
-          possibleMoves.add(f1Move); //add the move to possible moves
+      if (forwardOne.getRow() >= 0 && forwardOne.getRow() < 8 && forwardOne.getColumn() >= 0 && forwardOne.getColumn() < 8) {
+        if (chessBoard.getPiece(forwardOne) == null) { //checks if the spot at forwardOne position is empty
+          ChessMove f1Move;
+          if (forwardOne.getRow() == 7) { //check if it is at last row for promotion
+            //f1Move = new ChessMoveImpl(chessPosition, forwardOne, true); //promote true and create the forward1 move
+            possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.BISHOP)); //add promotion pieces to possible moves
+            possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.QUEEN));
+            possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.KNIGHT));
+            possibleMoves.add(new ChessMoveImpl(chessPosition, forwardOne, PieceType.ROOK));
+          } else {
+            f1Move=new ChessMoveImpl(chessPosition, forwardOne, false); //if can't be promoted, create a move where it is not promoted
+            possibleMoves.add(f1Move); //add the move to possible moves
+          }
         }
-
       }
       ChessPosition forwardTwo=new ChessPositionImpl(chessPosition.getRow() + 2, chessPosition.getColumn());
       if (chessPosition.getRow() == 1 && chessBoard.getPiece(forwardTwo) == null) { //if at row one, it is first turn
