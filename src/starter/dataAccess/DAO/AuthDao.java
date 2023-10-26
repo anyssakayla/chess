@@ -49,4 +49,5 @@ public class AuthDao {
     throw new DataAccessException("The authToken is not in the database");
   }
 
+
 }

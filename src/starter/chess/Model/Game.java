@@ -1,4 +1,6 @@
 package chess.Model;
+import java.util.Collection;
+import java.util.HashSet;
 import chess.ChessGame;
 import chess.ChessGameImpl;
 
@@ -8,6 +10,7 @@ public class Game {
   String blackUsername;
   String gameName;
   ChessGame game = new ChessGameImpl();
+  private Collection<String> gameObserver = new HashSet<String>();
 
   /**
    * Represents a ChessGame ID
@@ -15,7 +18,7 @@ public class Game {
    * @param gameID Represents a unique ID number that is associated to a game
    * @param gameName unique name that represents a chess game
    * */
-  Game(int gameID, String gameName){
+  public Game(int gameID, String gameName){
     this.gameID = gameID;
     this.gameName = gameName;
   }
@@ -58,5 +61,21 @@ public class Game {
 
   public void setGame(ChessGame game) {
     this.game = game;
+  }
+
+  public Collection<String> getGameObserver() {
+    return gameObserver;
+  }
+
+  public void addGameObserver(String username){
+    gameObserver.add(username);
+  }
+
+  public void removeGameObserver(String username){
+    gameObserver.remove(username);
+  }
+
+  public void setGameObserver(Collection<String> gameObserver) {
+    this.gameObserver = gameObserver;
   }
 }
