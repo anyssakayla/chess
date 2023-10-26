@@ -1,10 +1,16 @@
 package Request;
 
+
 public class LoginReq {
   private String username;
   private String password;
 
-  public LoginReq(){} //constructor
+  /**
+   * Contains request data to log the user in
+   * @param username The string that represents a user's unique username
+   * @param password The unique password that is associated with a user to log into the game
+   */
+  public LoginReq(String username, String password){} //constructor
 
   public String getUsername() {
     return username;

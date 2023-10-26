@@ -1,5 +1,8 @@
 package Result;
 
+/**
+ * The register result for a user's request to register for a game login
+ */
 public class RegisterResult {
   private String message;
   private String username;

@@ -3,6 +3,8 @@ import dataAccess.DataAccessException;
 import chess.Model.Game;
 import chess.ChessGame;
 import chess.ChessGameImpl;
+import java.util.Collection;
+import java.util.HashSet;
 
 import java.util.ArrayList;
 

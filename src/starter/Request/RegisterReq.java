@@ -5,6 +5,13 @@ public class RegisterReq {
   private String password;
   private String email;
 
+  /**
+   * Contains request data for a user to register for a game login
+   * @param username The string that represents a user's unique username
+   * @param password The unique password that is associated with a user
+   * @param email The email associated with a user
+   */
+  public RegisterReq(String username, String password, String email){}
   public String getUsername() {
     return username;
   }

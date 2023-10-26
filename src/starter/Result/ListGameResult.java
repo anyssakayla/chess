@@ -1,4 +1,5 @@
 package Result;
+import Request.ListGamesReq;
 import chess.Model.Game;
 
 import java.util.ArrayList;
@@ -9,6 +10,12 @@ public class ListGameResult {
   private ArrayList<HashMap<String, Object>> gamesInDatabase; //should i use an arrayList?
   private String message;
 
+  /**
+   * The result data for all the games listed under a user
+   * @param message in case an error occurs
+   * @param gamesInDatabase the list of games to return
+   */
+  public ListGameResult(String message, ArrayList<HashMap<String, Object>> gamesInDatabase){}
   public String getMessage() {
     return message;
   }

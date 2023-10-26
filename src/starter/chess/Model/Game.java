@@ -9,6 +9,12 @@ public class Game {
   String gameName;
   ChessGame game = new ChessGameImpl();
 
+  /**
+   * Represents a ChessGame ID
+   *
+   * @param gameID Represents a unique ID number that is associated to a game
+   * @param gameName unique name that represents a chess game
+   * */
   Game(int gameID, String gameName){
     this.gameID = gameID;
     this.gameName = gameName;

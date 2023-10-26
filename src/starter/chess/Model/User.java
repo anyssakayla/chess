@@ -5,9 +5,22 @@ public class User {
   String password;
   String email;
 
-  User(String username, String password){
+  /**
+   * Represents a user
+   *
+   * @param username The string that represents a user's unique username
+   * @param password The unique password that is associated with a user to log into the game
+   * */
+  public User(String username, String password, String email){
     this.username = username;
     this.password = password;
+    this.email = email;
+  }
+
+  public User(User givenUser){
+    this.username = new String(givenUser.username);
+    this.password = new String(givenUser.password);
+    this.email = new String(givenUser.email);
   }
 
   public void setUsername(String username) {
