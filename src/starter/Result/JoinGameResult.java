@@ -9,7 +9,11 @@ public class JoinGameResult {
    * @param gameID The unique ID of the game the user wants to join
    * @param message in case an error occurs
    */
-  public JoinGameResult(String message, int gameID){}
+  public JoinGameResult(String message, int gameID){
+    this.message = message;
+    this.gameID = gameID;
+  }
+  public JoinGameResult(){}
   public int getGameID() {
     return gameID;
   }

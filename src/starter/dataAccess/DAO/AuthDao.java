@@ -10,6 +10,7 @@ public class AuthDao {
   public static Collection<AuthToken> authInDB = new HashSet<AuthToken>();
   /**
    * Inserts an authtoken into the database depending on the provided username and AuthToken
+   * Creates an authtoken for the username
    *
    * @param username The string that represents a user's unique username
    * */
@@ -27,6 +28,20 @@ public class AuthDao {
   }
 
   /**
+   * Adds the provided authToken to the database
+   *
+   * @param authToken The token to be added
+   * */
+  public void insertAuth(AuthToken authToken) throws DataAccessException{
+    for(AuthToken auth : authInDB){
+      if(auth.getAuthToken().equals(authToken)){ //if there is already this authToken in the database
+        insertAuth(authToken.getUsername()); //use this username to create a different token, then add it to database
+      }
+    }
+    authInDB.add(authToken);
+  }
+
+  /**
    * Removes the authToken associated with the provided username
    *
    * @param auth The string that represents a user's unique token
@@ -36,7 +51,7 @@ public class AuthDao {
   }
 
   /**
-   * Gets the authToken associated with the provided username
+   * Gets the authToken associated that is in the database
    *
    * @param authToken The string that represents a user's unique token
    * */
@@ -47,6 +62,10 @@ public class AuthDao {
       }
     }
     throw new DataAccessException("The authToken is not in the database");
+  }
+
+  public void clearAuthTokensInDB(){
+    authInDB.clear();
   }
 
 

@@ -1,9 +1,12 @@
 package Request;
 
+import Result.JoinGameResult;
+
 public class JoinGameReq {
   private int gameID;
   private String authToken;
   private String teamColor;
+  private String username;
   /**
    * The request data for a user to join a game
    * @param gameID The unique ID of the game the user wants to join
@@ -13,6 +16,7 @@ public class JoinGameReq {
     this.gameID = gameID;
     this.teamColor = teamColor;
   }
+
   public int getGameID() {
     return gameID;
   }
@@ -35,5 +39,13 @@ public class JoinGameReq {
 
   public void setTeamColor(String teamColor) {
     this.teamColor=teamColor;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username=username;
   }
 }

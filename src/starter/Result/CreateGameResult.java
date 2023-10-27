@@ -9,6 +9,7 @@ public class CreateGameResult {
    * @param gameID the ID for the game to be made
    */
 public CreateGameResult(String message, int gameID){}
+  public CreateGameResult(){}
   public int getGameID() {
     return gameID;
   }

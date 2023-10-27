@@ -7,6 +7,8 @@ public class RegisterResult {
   private String message;
   private String username;
   private String authToken;
+  private String password;
+  private String email;
 
   public String getMessage() {
     return message;
@@ -30,5 +32,21 @@ public class RegisterResult {
 
   public void setAuthToken(String authToken) {
     this.authToken=authToken;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }

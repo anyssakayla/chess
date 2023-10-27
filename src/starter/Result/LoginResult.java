@@ -35,4 +35,7 @@ public class LoginResult {
   public void setUsername(String username) {
     this.username=username;
   }
+
+  public boolean isSuccess() { return true; //TODO: FIX THIS
+  }
 }

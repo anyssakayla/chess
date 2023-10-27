@@ -23,6 +23,8 @@ public class Game {
     this.gameName = gameName;
   }
 
+  public Game() {}
+
   public int getGameID() {
     return gameID;
   }

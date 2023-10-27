@@ -2,6 +2,7 @@ package Service;
 
 import Request.LoginReq;
 import Result.LoginResult;
+import chess.Model.AuthToken;
 
 public class LoginService {
 
@@ -11,5 +12,5 @@ public class LoginService {
    * @param request The login request
    * @return A LoginResult object with information on if the request was successful
    * */
-  public LoginResult login(LoginReq request){return null;}
+  public LoginResult login(AuthToken auth){return null;}
 }

@@ -63,5 +63,9 @@ public class UserDao {
     throw new DataAccessException("User is not in the database");
   }
 
+  public void clearUsersInDatabase(){
+    userInDB.clear();
+  }
+
 
 }

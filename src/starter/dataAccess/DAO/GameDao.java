@@ -97,7 +97,7 @@ public class GameDao {
     gamesInDB.clear();
   } //clears all game data from database
 
-  private int createGameID(){ //TODO: FIX THIS FUNCTION
+  public int createGameID(){ //TODO: FIX THIS FUNCTION
 //    Random random = new Random();
 //    int createID = random.nextInt(1000); //random int with the 1000 bound
 //    while (gamesInDB.contains(createID)){ //if it is already in database, make a new one
@@ -112,5 +112,14 @@ public class GameDao {
       }
     }
     return createID;
+  }
+
+  public int getGameID(String gameName) throws DataAccessException{
+    for(Game game : gamesInDB){
+      if(game.getGameName().equals(gameName)){
+        return game.getGameID();
+      }
+    }
+    throw new DataAccessException("The gameName is not in the database");
   }
 }

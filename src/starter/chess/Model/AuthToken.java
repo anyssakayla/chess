@@ -1,4 +1,5 @@
 package chess.Model;
+import java.util.UUID;
 
 public class AuthToken {
   String authToken;
@@ -13,6 +14,10 @@ public class AuthToken {
  public AuthToken(String authToken, String username){
     this.authToken = authToken;
     this.username = username;
+  }
+
+  public AuthToken(){
+   authToken = UUID.randomUUID().toString();
   }
 
   public String getAuthToken() {
