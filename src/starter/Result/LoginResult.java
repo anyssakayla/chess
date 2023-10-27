@@ -12,6 +12,7 @@ public class LoginResult {
    * @param message in case an error occurs, it will use a message
    */
   public LoginResult(String message, String authToken, String username){}
+  public LoginResult(){}
   public String getMessage() {
     return message;
   }

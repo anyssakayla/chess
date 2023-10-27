@@ -21,7 +21,7 @@ import spark.Response;
 //log if it worked to user
 public class LoginHandler implements HttpHandler {
   @Override
-  public void handle(HttpExchange exchange) throws IOException {
+  public void handle(HttpExchange exchange) throws IOException, DataAccessException {
 
     try{
       if (exchange.getRequestMethod().toLowerCase().equals("post")) {
@@ -43,6 +43,7 @@ public class LoginHandler implements HttpHandler {
         if (result.isSuccess()) {
           exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
         } else {
+          throw new DataAccessException("Testing");
           exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
         }
         OutputStream resBody = exchange.getResponseBody();

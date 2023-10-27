@@ -7,7 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class ListGameResult {
-  private ArrayList<HashMap<String, Object>> gamesInDatabase; //should i use an arrayList?
+  private Collection<Game> gamesInDatabase; //should i use an arrayList?
+  //used to be ArrayList<HashMap<String, Object>> gamesInDatabase
   private String message;
 
   /**
@@ -15,7 +16,8 @@ public class ListGameResult {
    * @param message in case an error occurs
    * @param gamesInDatabase the list of games to return
    */
-  public ListGameResult(String message, ArrayList<HashMap<String, Object>> gamesInDatabase){}
+  public ListGameResult(String message, Collection<Game> gamesInDatabase){}
+  public ListGameResult(){}
   public String getMessage() {
     return message;
   }
@@ -24,11 +26,11 @@ public class ListGameResult {
     this.message=message;
   }
 
-  public ArrayList<HashMap<String, Object>> getGamesInDatabase() {
+  public Collection<Game> getGamesInDatabase() {
     return gamesInDatabase;
   }
 
-  public void setGamesInDatabase(ArrayList<HashMap<String, Object>> gamesInDatabase) {
+  public void setGamesInDatabase(Collection<Game> gamesInDatabase) {
     this.gamesInDatabase=gamesInDatabase;
   }
 }

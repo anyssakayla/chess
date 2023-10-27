@@ -52,6 +52,7 @@ public class AuthDao {
 
   /**
    * Gets the authToken associated that is in the database
+   * Checks that the authToken is in the database
    *
    * @param authToken The string that represents a user's unique token
    * */
@@ -62,6 +63,14 @@ public class AuthDao {
       }
     }
     throw new DataAccessException("The authToken is not in the database");
+  }
+  public String getAuthByUsername(String username) throws DataAccessException{
+    for(AuthToken auth : authInDB){ //search the collection for the indicated authToken string
+      if(auth.getUsername().equals(username)){ //if it equals the authToken to find, return it
+        return auth.getAuthToken();
+      }
+    }
+    throw new DataAccessException("The user has no authToken");
   }
 
   public void clearAuthTokensInDB(){
