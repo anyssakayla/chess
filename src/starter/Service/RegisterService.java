@@ -42,8 +42,11 @@ public class RegisterService {
     user.setPassword(request.getPassword());
     userDao.insertUser(user);
 
+    //set the result information
     result.setAuthToken(authToken.getAuthToken()); //TODO: Check if we have to use Dao since token is created and stored there
     result.setUsername(request.getUsername());
+    result.setEmail(request.getEmail());
+    result.setPassword(request.getPassword()); //do we need this one?
 
     return result;
   }

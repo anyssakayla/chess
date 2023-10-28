@@ -17,7 +17,7 @@ public class RegisterReq {
   }
 
   public void setUsername(String username) {
-    this.username=username;
+    this.username = username;
   }
 
   public String getPassword() {
@@ -33,6 +33,6 @@ public class RegisterReq {
   }
 
   public void setEmail(String email) {
-    this.email=email;
+    this.email = email;
   }
 }

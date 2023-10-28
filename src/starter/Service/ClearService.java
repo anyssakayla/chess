@@ -15,9 +15,12 @@ public class ClearService {
    * Clears all information from the database
    * @return A ClearResult object with information on if the request was completed
    * */
-  public void clearApplication(){
+  public ClearAppResult clearApplication(ClearAppReq request){
+    ClearAppResult result = new ClearAppResult();
     gameDao.clearGames();
     userDao.clearUsersInDatabase();
     authDao.clearAuthTokensInDB();
+
+    return result; //TODO: add other conditions and fail statements? But clear shouls always be fine
   }
 }

@@ -31,6 +31,8 @@ public class CreateGameService {
     gameDao.insertGame(gameName);
 
     result.setGameID(gameDao.getGameID(gameName));
+    result.setGameName(gameName);
+    result.setAuthToken(requestAuthToken);
     return result;
   }
 }

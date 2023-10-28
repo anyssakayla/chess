@@ -2,6 +2,8 @@ package Result;
 
 public class CreateGameResult {
   private int gameID;
+  private String authToken;
+  private String gameName;
   private String message;
   /**
    * The result data for a user's request to create a game
@@ -24,5 +26,21 @@ public CreateGameResult(String message, int gameID){}
 
   public void setMessage(String message) {
     this.message=message;
+  }
+
+  public String getAuthToken() {
+    return authToken;
+  }
+
+  public void setAuthToken(String authToken) {
+    this.authToken=authToken;
+  }
+
+  public String getGameName() {
+    return gameName;
+  }
+
+  public void setGameName(String gameName) {
+    this.gameName=gameName;
   }
 }

@@ -3,6 +3,7 @@ package Request;
 public class CreateGameReq {
   private String authToken;
   private String gameName;
+  private int gameID;
 
   /**
    * The request data to create a game
@@ -24,5 +25,13 @@ public class CreateGameReq {
 
   public void setAuthToken(String authToken) {
     this.authToken = authToken;
+  }
+
+  public int getGameID() {
+    return gameID;
+  }
+
+  public void setGameID(int gameID) {
+    this.gameID=gameID;
   }
 }
