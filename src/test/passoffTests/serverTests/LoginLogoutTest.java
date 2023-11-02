@@ -26,7 +26,7 @@ public class LoginLogoutTest {
   static AuthDao authDao = new AuthDao();
 
   @BeforeAll
-  public static void setUp() throws DataAccessException { //Bottom two pass
+  public static void setUp() throws DataAccessException {
     gameDao.clearGames();
     userDao.clearUsersInDatabase();
     authDao.clearAuthTokensInDB();
@@ -65,6 +65,29 @@ public class LoginLogoutTest {
     logoutService.logout(logoutReq);
 
     assertTrue(authDao.findAll().isEmpty());
+  }
+
+  @Test
+  public void LoginTwoPeopleTest()throws DataAccessException, IOException {
+
+    RegisterReq registerReq = new RegisterReq("Lauren", "okyay", "Lauren@gmail.com");
+    RegisterService regService = new RegisterService();
+    regService.register(registerReq);
+
+
+    userDao.findUser("Alilah"); //userDatabase is empty
+    LoginService loginService = new LoginService();
+    LoginReq loginReq = new LoginReq("Alilah", "password");
+    LoginResult loginResult = loginService.login(loginReq);
+
+    assertEquals(loginResult.getAuthToken(), authDao.getAuthStringByUsername("Alilah"));
+
+    userDao.findUser("Lauren");
+    LoginService loginLauren = new LoginService();
+    LoginReq loginReq2 = new LoginReq("Lauren", "okyay");
+    LoginResult loginLaurenResult = loginLauren.login(loginReq2);
+
+    assertNotEquals(loginLaurenResult.getAuthToken(), loginResult.getAuthToken());
   }
 
 

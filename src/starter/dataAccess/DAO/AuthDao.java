@@ -22,11 +22,6 @@ public class AuthDao {
     }
     for(AuthToken auth : authInDB){
 
-      //do a second for : ?
-//      for(int i = 0; i < authInDB.size(); i++){
-//        if(!auth.getUsername().equals(username)){
-//          if(auth.getAuthToken() == i)//if the authtoken is equal to Db.at(i), however, there is no at i for a collection
-//        }
       if(auth.getUsername().equals(username)){
         if(!authInDB.contains(auth.getAuthToken())){ //check that the authtoken isn't already in the db
           return auth; //return the authtoken if it is in database
@@ -97,6 +92,7 @@ public class AuthDao {
         else{
           String uniqueToken = UUID.randomUUID().toString(); //create a unique string to be used for user's authToken
           AuthToken newToken = new AuthToken(uniqueToken, username); //create new authtoken associated with username
+          if(!authInDB.contains(newToken));
           authInDB.add(newToken); //add the new authToken to the database
           return newToken.getAuthToken();
         }

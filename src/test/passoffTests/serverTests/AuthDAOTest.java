@@ -37,4 +37,11 @@ public class AuthDAOTest {
   public void falseAuthToken() throws DataAccessException{
     assertThrows(DataAccessException.class, ()-> authDao.insertAuth("fake"));
   }
+
+//  @Test
+//  public void duplicateAuthCheck()throws DataAccessException{
+//    //TODO: create auth test yourself to see how they are getting duplicated
+//    //start off loging the person in
+//    //TODO: maybe start off checking this in the loginTest because login is already done
+//  }
 }
