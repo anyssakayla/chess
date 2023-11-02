@@ -12,23 +12,23 @@ import java.util.Objects;
 
 public class LogoutHandler {
 
-  public String handle(Request request, Response response) throws IOException, DataAccessException {
+  public String handle(Request request, Response response) throws DataAccessException {
     Gson gson = new Gson();
-    LogoutService runService=new LogoutService();
+    LogoutService runService = new LogoutService();
 
     LogoutReq runRequest = gson.fromJson(request.body(), LogoutReq.class);
     LogoutResult runResult = runService.logout(runRequest);
 
-    //TODO: FIX THE RESULT MESSAGES
-    if(Objects.equals(runResult.getMessage(), "Error: username/fix this")){
+
+    if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status
     }
     if(Objects.equals(runResult.getMessage(), "Error: bad request")){
-      response.status(400);
+      response.status(401);
     }
-    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
-      response.status(403);
-    }
+//    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
+//      response.status(403);
+//    }
     return gson.toJson(runResult); //if no errors occur, return the result given by
   }
 }

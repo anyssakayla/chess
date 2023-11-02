@@ -24,15 +24,14 @@ public class LoginHandler{
     LoginReq runRequest = gson.fromJson((request.body()), LoginReq.class); //converts HTTP request
     LoginResult runResult = runService.login(runRequest); //run the service with the request to get response
 
-    //TODO: FIX THE RESULT MESSAGES
-    if(Objects.equals(runResult.getMessage(), "Error: username/fix this")){
+    if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status
     }
-    if(Objects.equals(runResult.getMessage(), "Error: bad request")){
-      response.status(400);
-    }
-    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
-      response.status(403);
+//    if(Objects.equals(runResult.getMessage(), "Error: bad request")){
+//      response.status(400);
+//    }
+    if(Objects.equals(runResult.getMessage(), "Error: unauthorized")){
+      response.status(401);
     }
     return gson.toJson(runResult); //if no errors occur, return the result given by the service as a Json
   }

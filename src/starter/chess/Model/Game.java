@@ -1,6 +1,8 @@
 package chess.Model;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
+
 import chess.ChessGame;
 import chess.ChessGameImpl;
 
@@ -80,4 +82,41 @@ public class Game {
   public void setGameObserver(Collection<String> gameObserver) {
     this.gameObserver = gameObserver;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    Game game1 = (Game) obj;
+    boolean gameEquals = true;
+    if (this == obj) return true;
+    if(obj == null && this != null){
+      return false;
+    }
+    if(obj != null && this == null){
+      return false;
+    }
+    if(!(game1.getGameName().equals(this.getGameName()))){
+      return false;
+    }
+
+    if((game1.getGameID() != this.getGameID())){
+      return false;
+    }
+
+    if(game1.getBlackUsername() != this.getBlackUsername()){
+      return false;
+    }
+    if(game1.getWhiteUsername() != this.getWhiteUsername()){
+      return false;
+    }
+    if(!(game1.gameObserver.equals(this.gameObserver))){
+      return false;
+    }
+
+    return gameEquals;
+  }
+
+//  @Override
+//  public int hashCode() {
+//    return Objects.hash(gameID, whiteUsername, blackUsername, gameName, game, gameObserver);
+//  }
 }

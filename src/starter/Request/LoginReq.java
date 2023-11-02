@@ -10,7 +10,10 @@ public class LoginReq {
    * @param username The string that represents a user's unique username
    * @param password The unique password that is associated with a user to log into the game
    */
-  public LoginReq(String username, String password){} //constructor
+  public LoginReq(String username, String password){
+    this.username = username;
+    this.password = password;
+  } //constructor
 
   public String getUsername() {
     return username;

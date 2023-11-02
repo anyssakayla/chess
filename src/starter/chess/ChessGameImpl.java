@@ -1,11 +1,25 @@
 package chess;
 
+import com.google.gson.GsonBuilder;
+
 import java.util.Collection;
 import java.util.HashSet;
 
 public class ChessGameImpl implements ChessGame{
   public ChessBoard chessBoard = new ChessBoardImpl();
   public TeamColor teamColor;
+
+  //example shown in class
+//  public static ChessGameImpl create(String serializer){
+//    var x = new Gson().fromJson(serializedGame, ChessGameImpl.class);
+//
+//    GsonBuilder gsonBuilder = new GsonBuilder();
+//    gsonBuilder.registerTypeAdapter(ChessGame.class, new ChessGameAdapter());
+//    gsonBuilder.registerTypeAdapter(ChessGameImpl.class, new ChessGameAdapter());
+//    x = gsonBuilder.create().fromJson(serializedGame, ChessGameImpl.class);
+//
+//    return x;
+//  }
 
   @Override
   public TeamColor getTeamTurn() {

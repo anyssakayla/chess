@@ -28,11 +28,13 @@ public class RegisterService {
       result.setMessage("Error: bad request");
       return result;
     }
-    if(userDao.findUser(request.getUsername())!= null){ //if username is already taken, send message
-      result.setMessage("This username is already taken");
+    if(userDao.checkIfTaken(request.getUsername())== null){ //if username is already taken, send message
+      result.setMessage("Error: already taken");
       return result;
     }
 
+
+   // authToken.setAuthToken(request.getAuthToken().toString()); //pass in authToken from request
     authToken.setUsername(request.getUsername()); //set authToken for the result
     authDao.insertAuth(authToken); //insert authToken to Dao
    // authDao.insertAuth(request.getUsername()); //create and insert authtoken for the new user

@@ -6,6 +6,12 @@ public class ChessBoardImpl implements ChessBoard{
 
   ChessPiece[][] PiecesOnBoard = new ChessPiece[8][8]; //2D array of board
 
+//  public static Gson serializer(){
+//    var obj = new Gson().fromJson("{'squares':)
+//  }
+
+
+
   @Override
   public void addPiece(ChessPosition position, ChessPiece piece) {//add a piece to the board based on it's position
     int curRow = position.getRow(); //get piece's row and column

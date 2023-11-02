@@ -23,10 +23,16 @@ public class CreateGameService {
     String gameName = request.getGameName();
     String requestAuthToken = request.getAuthToken();
 
-    if(gameName == null || requestAuthToken == null){
+    if(gameName == null ){
       result.setMessage("Error: bad request");
       return result;
     }
+    if(authDao.getAuth(requestAuthToken) == null){
+      result.setMessage("Error: unauthorized");
+      return result;
+    }
+
+
     authDao.getAuth(requestAuthToken); //make sure the request authToken is in the database to create a game
     gameDao.insertGame(gameName);
 

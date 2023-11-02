@@ -38,6 +38,21 @@ public class AuthToken {
 
   @Override
   public boolean equals(Object obj) {
-    return super.equals(obj);
+    AuthToken objAuth = (AuthToken) obj;
+
+    if(this == obj){ //if equal, return true right away
+      return true;
+    }
+    if(!(obj.getClass() == this.getClass())){
+      return false;
+    }
+
+    if(!objAuth.username.equals(this.username)){
+      return false;
+    }
+    if(!objAuth.authToken.equals(this.authToken)){
+      return false;
+    }
+    return true; //met all requirements
   }
 }

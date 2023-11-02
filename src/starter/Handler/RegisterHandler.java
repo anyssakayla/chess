@@ -22,14 +22,14 @@ public class RegisterHandler {
     RegisterResult runResult = runService.register(runRequest);
 
 
-    //TODO: FIX THE RESULT MESSAGES
-    if(Objects.equals(runResult.getMessage(), "Error: username/fix this")){
+
+    if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status
     }
     if(Objects.equals(runResult.getMessage(), "Error: bad request")){
       response.status(400);
     }
-    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
+    if(Objects.equals(runResult.getMessage(), "Error: already taken")){
       response.status(403);
     }
     return gson.toJson(runResult); //if no errors occur, return the result given by the service as a Json

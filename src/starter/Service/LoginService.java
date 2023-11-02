@@ -26,7 +26,7 @@ public class LoginService {
     LoginResult result = new LoginResult();
 
     if(userDao.findUser(request.getUsername())== null){ //if username is already taken, send message
-      result.setMessage("This username does not exist");
+      result.setMessage("Error: unauthorized");
       return result;
     }
     user = userDao.findUser(request.getUsername()); //get the user based off the request username
@@ -35,6 +35,6 @@ public class LoginService {
       throw new IOException("Error: unauthorized");
     }
     result.setUsername(request.getUsername());
-    result.setAuthToken(authDao.getAuthByUsername(request.getUsername()));
+    result.setAuthToken(authDao.getAuthStringByUsername(request.getUsername()));
     return result;}
 }

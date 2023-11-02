@@ -9,7 +9,10 @@ public class CreateGameReq {
    * The request data to create a game
    * @param gameName The unique name of the game to create
    */
-  public CreateGameReq(String gameName){}
+  public CreateGameReq(String gameName){
+    this.gameName = gameName;
+  }
+  public CreateGameReq(){}
 
   public void setGameName(String gameName){
     this.gameName = gameName;

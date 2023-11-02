@@ -47,4 +47,26 @@ public class User {
   public void setEmail(String email) {
     this.email = email;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    User objUser = (User) obj;
+    if(this == obj){
+      return true;
+    }
+    if(this.getClass() != obj.getClass()){
+      return false;
+    }
+    if(!this.getUsername().equals(objUser.getUsername())){
+      return false;
+    }
+    if(!this.getPassword().equals(objUser.getPassword())){
+      return false;
+    }
+    if(!this.getEmail().equals(objUser.getEmail())){
+      return false;
+    }
+    return true;
+  }
+
 }

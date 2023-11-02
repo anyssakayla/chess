@@ -18,16 +18,15 @@ public class ListGamesHandler {
     ListGamesReq runRequest = gson.fromJson(request.body(), ListGamesReq.class);
     ListGameResult runResult = runService.listGames(runRequest);
 
-    //TODO: FIX THE RESULT MESSAGES
-    if(Objects.equals(runResult.getMessage(), "Error: username/fix this")){
+    if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status
     }
-    if(Objects.equals(runResult.getMessage(), "Error: bad request")){
-      response.status(400);
+    if(Objects.equals(runResult.getMessage(), "Error: unauthorized")){
+      response.status(401);
     }
-    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
-      response.status(403);
-    }
+//    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){
+//      response.status(403);
+//    }
     return gson.toJson(runResult);
   }
 }
