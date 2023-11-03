@@ -26,12 +26,6 @@ public class Game {
     this.gameName = gameName;
   }
 
-  public Game(String gameName){
-    this.gameName = gameName;
-    GameDao gameDao = new GameDao();
-    gameID = gameDao.findAll().size() + 1000;
-    game = new ChessGameImpl();
-  }
   public Game() {}
 
   public int getGameID() {

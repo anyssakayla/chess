@@ -2,7 +2,6 @@ package passoffTests.serverTests;
 import Request.LoginReq;
 import Request.LogoutReq;
 import Request.RegisterReq;
-import Result.RegisterResult;
 import Service.RegisterService;
 import chess.Model.User;
 import Service.LoginService;
@@ -40,7 +39,6 @@ public class LoginLogoutTest {
   @Test
   public void LoginTest()throws DataAccessException, IOException {
 
-    //userDao.findUser("Alilah"); //userDatabase is empty
     LoginService loginService = new LoginService();
     LoginReq loginReq = new LoginReq("Alilah", "password");
     LoginResult loginResult = loginService.login(loginReq);
@@ -69,7 +67,16 @@ public class LoginLogoutTest {
     assertTrue(authDao.findAll().size() == 0);
   }
 
-  //
+  @Test
+  public void LogoutFakeTest()throws DataAccessException{ //PASSES
+    authDao.clearAuthTokensInDB();
+    AuthDao authDao = new AuthDao();
+    LogoutService logoutService = new LogoutService();
+    LogoutReq logoutReq = new LogoutReq("fakeUsername", authDao.getAuthStringByUsername("fakeUsername"));
+    LogoutResult result = logoutService.logout(logoutReq.getAuthToken());
+
+    assertEquals(result.getMessage(), "Error: unauthorized");
+  }
 
 
 
