@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import chess.ChessGame;
 import chess.ChessGameImpl;
+import dataAccess.DAO.GameDao;
 
 public class Game {
   int gameID;
@@ -25,6 +26,12 @@ public class Game {
     this.gameName = gameName;
   }
 
+  public Game(String gameName){
+    this.gameName = gameName;
+    GameDao gameDao = new GameDao();
+    gameID = gameDao.findAll().size() + 1000;
+    game = new ChessGameImpl();
+  }
   public Game() {}
 
   public int getGameID() {

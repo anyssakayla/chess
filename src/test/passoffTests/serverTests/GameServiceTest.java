@@ -133,7 +133,7 @@ public class GameServiceTest { //ALL PASS
     JoinGameReq joinGameReq = new JoinGameReq("white", IDForGame);
     joinGameReq.setUsername("Alilah");
     joinGameReq.setAuthToken(authDao.getAuthStringByUsername("Alilah"));
-    joinGameService.joinGame(joinGameReq);
+    joinGameService.joinGame(joinGameReq, authDao.getAuthStringByUsername("Alilah"));
 
     assertEquals("Alilah", gameDao.findGame(IDForGame).getWhiteUsername());
   }

@@ -15,10 +15,12 @@ public class JoinGameHandler {
     Gson gson = new Gson();
     JoinGameService runService = new JoinGameService();
 
+    String auth = request.headers("authorization");
     JoinGameReq runRequest = gson.fromJson(request.body(), JoinGameReq.class);
-    JoinGameResult runResult = runService.joinGame(runRequest);
+    JoinGameResult runResult = runService.joinGame(runRequest, auth);
 
 
+    response.status(200);
     if (Objects.equals(runResult.getMessage(), "Error: description")) {
       response.status(500); //set the status to 500 error status
     }
