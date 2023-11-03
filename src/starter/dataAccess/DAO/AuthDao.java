@@ -20,25 +20,11 @@ public class AuthDao {
     if(currUser.findUser(username) == null){
       throw new DataAccessException("User not in database");
     }
-    for(AuthToken auth : authInDB){
-
-      if(auth.getUsername().equals(username)){
-        if(!authInDB.contains(auth.getAuthToken())){ //check that the authtoken isn't already in the db
-          return auth; //return the authtoken if it is in database
-        }
-        else{
-          String uniqueToken = UUID.randomUUID().toString(); //create a unique string to be used for user's authToken
-          AuthToken newToken = new AuthToken(uniqueToken, username); //create new authtoken associated with username
+        String uniqueToken=UUID.randomUUID().toString(); //create a unique string to be used for user's authToken
+        AuthToken newToken=new AuthToken(uniqueToken, username); //create new authtoken associated with username
           authInDB.add(newToken); //add the new authToken to the database
           return newToken;
-        }
-      }
-    }
 
-    String uniqueToken = UUID.randomUUID().toString(); //create a unique string to be used for user's authToken
-    AuthToken newToken = new AuthToken(uniqueToken, username); //create new authtoken associated with username
-    authInDB.add(newToken); //add the new authToken to the database
-    return newToken;
   }
 
   /**
@@ -47,12 +33,9 @@ public class AuthDao {
    * @param authToken The token to be added
    * */
   public void insertAuth(AuthToken authToken) throws DataAccessException{
-    for(AuthToken auth : authInDB){
-      if(auth.getAuthToken().equals(authToken)){ //if there is already this authToken in the database
-        insertAuth(authToken.getUsername()); //use this username to create a different token, then add it to database
-      }
+    if(!authInDB.contains(authToken)){
+      authInDB.add(authToken);
     }
-    authInDB.add(authToken);
   }
 
   /**
@@ -87,14 +70,16 @@ public class AuthDao {
     for(AuthToken auth : authInDB){ //search the collection for the indicated authToken string
       if(auth.getUsername().equals(username)){ //if it equals the authToken to find, return it
         if(!authInDB.contains(auth.getAuthToken())){ //check that the authtoken isn't already in the db
+         // authInDB.add(auth);
           return auth.getAuthToken(); //return the authtoken if it is in database
         }
         else{
           String uniqueToken = UUID.randomUUID().toString(); //create a unique string to be used for user's authToken
           AuthToken newToken = new AuthToken(uniqueToken, username); //create new authtoken associated with username
-          if(!authInDB.contains(newToken));
-          authInDB.add(newToken); //add the new authToken to the database
-          return newToken.getAuthToken();
+          if(!authInDB.contains(newToken)){
+            authInDB.add(newToken); //add the new authToken to the database
+            return newToken.getAuthToken();
+          }
         }
         //insertAuth(auth.getAuthToken()); //this doesn't change the auth if it is duplicate
         //return auth.getAuthToken();

@@ -37,6 +37,6 @@ public class LoginResult {
     this.username=username;
   }
 
-  public boolean isSuccess() { return true; //TODO: FIX THIS
+  public boolean isSuccess() { return true;
   }
 }

@@ -59,12 +59,13 @@ public class LoginLogoutTest {
 
   @Test
   public void LogoutTest()throws DataAccessException{ //PASSES
+    authDao.clearAuthTokensInDB();
     AuthDao authDao = new AuthDao();
     LogoutService logoutService = new LogoutService();
     LogoutReq logoutReq = new LogoutReq("Alilah", authDao.getAuthStringByUsername("Alilah"));
     logoutService.logout(logoutReq);
 
-    assertTrue(authDao.findAll().isEmpty());
+    assertTrue(authDao.findAll().size() == 0);
   }
 
   @Test

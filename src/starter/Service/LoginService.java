@@ -31,10 +31,11 @@ public class LoginService {
     }
     user = userDao.findUser(request.getUsername()); //get the user based off the request username
     if(!request.getPassword().equals(user.getPassword())){ //if the password is incorrect
-      result.setMessage("Password incorrect");
-      throw new IOException("Error: unauthorized");
+      result.setMessage("Error: unauthorized");
+      return result;
+      //throw new IOException("Error: unauthorized");
     }
     result.setUsername(request.getUsername());
-    result.setAuthToken(authDao.getAuthStringByUsername(request.getUsername()));
+    result.setAuthToken(authDao.insertAuth(request.getUsername()).getAuthToken());
     return result;}
 }
