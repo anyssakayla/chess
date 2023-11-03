@@ -63,7 +63,7 @@ public class LoginLogoutTest {
     AuthDao authDao = new AuthDao();
     LogoutService logoutService = new LogoutService();
     LogoutReq logoutReq = new LogoutReq("Alilah", authDao.getAuthStringByUsername("Alilah"));
-    logoutService.logout(logoutReq);
+    logoutService.logout(logoutReq.getAuthToken());
 
     assertTrue(authDao.findAll().size() == 0);
   }

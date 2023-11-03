@@ -58,7 +58,7 @@ public class GameServiceTest { //ALL PASS
     CreateGameService createService = new CreateGameService();
     createRequest.setAuthToken(authDao.getAuthTokenByUsername("Alilah").getAuthToken());
 
-    createService.createGame(createRequest);
+    createService.createGame(createRequest, "working");
      assertNotNull(gameDao.findAll());
      
   }
@@ -74,7 +74,7 @@ public class GameServiceTest { //ALL PASS
     authDao.clearAuthTokensInDB();
     //set request's authToken before passing it into create game
     createRequest.setAuthToken(authDao.getAuthStringByUsername("Alilah")); //need authString or token?
-    CreateGameResult runResult = createService.createGame(createRequest);
+    CreateGameResult runResult = createService.createGame(createRequest, "testAuthtoken");
     assertEquals("Error: unauthorized", runResult.getMessage());
   }
 
@@ -98,9 +98,9 @@ public class GameServiceTest { //ALL PASS
     CreateGameReq gameReq3 = new CreateGameReq("Game 3");
     gameReq3.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
 
-    gameService.createGame(gameReq1);
-    gameService.createGame(gameReq2);
-    gameService.createGame(gameReq3);
+    gameService.createGame(gameReq1, "test1");
+    gameService.createGame(gameReq2, "test2");
+    gameService.createGame(gameReq3, "test3");
 
     assertEquals(gameDao.findAll().size(), 3);
 
@@ -127,7 +127,7 @@ public class GameServiceTest { //ALL PASS
     CreateGameReq createGameReq= new CreateGameReq("joingame1");
     authDao.insertAuth("Alilah");
     createGameReq.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
-    CreateGameResult createGameResult = createGameService.createGame(createGameReq);
+    CreateGameResult createGameResult = createGameService.createGame(createGameReq, "testauth");
 
     int IDForGame = createGameResult.getGameID();
     JoinGameReq joinGameReq = new JoinGameReq("white", IDForGame);
@@ -149,7 +149,7 @@ public class GameServiceTest { //ALL PASS
     CreateGameReq createGameReq= new CreateGameReq("joingame1");
     authDao.insertAuth("Alilah");
     createGameReq.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
-    CreateGameResult createGameResult = createGameService.createGame(createGameReq);
+    CreateGameResult createGameResult = createGameService.createGame(createGameReq, "testAuths");
 
     assertNotNull(gameDao.findAll());
 

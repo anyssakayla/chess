@@ -17,8 +17,10 @@ public class CreateGameHandler {
     CreateGameService runService=new CreateGameService();
 
     CreateGameReq runRequest=gson.fromJson(request.body(), CreateGameReq.class);
-    CreateGameResult runResult=runService.createGame(runRequest);
+    String authToken = request.headers("authorization");
+    CreateGameResult runResult=runService.createGame(runRequest, authToken);
 
+    response.status(200);
     if (Objects.equals(runResult.getMessage(), "Error: description")) {
       response.status(500); //set the status to 500 error status
     }

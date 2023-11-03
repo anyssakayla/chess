@@ -14,6 +14,11 @@ public class CreateGameReq {
   }
   public CreateGameReq(){}
 
+  public CreateGameReq(String gameName, String authToken){
+    this.gameName = gameName;
+    this.authToken = authToken;
+  }
+
   public void setGameName(String gameName){
     this.gameName = gameName;
   }

@@ -16,14 +16,15 @@ public class LogoutHandler {
     Gson gson = new Gson();
     LogoutService runService = new LogoutService();
 
-    LogoutReq runRequest = gson.fromJson(request.body(), LogoutReq.class);
-    LogoutResult runResult = runService.logout(runRequest);
+    //LogoutReq runRequest = gson.fromJson(request.body(), LogoutReq.class);
+    String token = request.headers("authorization");
+    LogoutResult runResult = runService.logout(token);
 
 
     if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status
     }
-    if(Objects.equals(runResult.getMessage(), "Error: bad request")){
+    if(Objects.equals(runResult.getMessage(), "Error: unauthorized")){
       response.status(401);
     }
 //    if(Objects.equals(runResult.getMessage(), "Error: username already taken")){

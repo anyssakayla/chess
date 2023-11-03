@@ -42,6 +42,15 @@ public class GameDao {
     throw new DataAccessException("This game does not exist in database;");
   }
 
+  public Game findGameName(String gameName){
+    for(Game game : gamesInDB){
+      if(game.getGameName() == gameName){
+        return game;
+      }
+    }
+    return null;
+  }
+
   /**
    * Returns all games in database
    *

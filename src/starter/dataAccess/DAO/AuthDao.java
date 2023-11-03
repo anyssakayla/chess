@@ -43,8 +43,8 @@ public class AuthDao {
    *
    * @param auth The string that represents a user's unique token
    * */
-  public void removeAuth(AuthToken auth) throws DataAccessException{
-    authInDB.remove(getAuth(auth.getAuthToken())); //get the token and delete it from db collection
+  public void removeAuth(String auth) throws DataAccessException{
+    authInDB.remove(getAuth(auth)); //get the token and delete it from db collection
   }
 
   public Collection<AuthToken> findAll(){

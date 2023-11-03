@@ -2,6 +2,7 @@ package Result;
 
 
 public class LogoutResult {
+  private String authToken;
   private String message;
 
   /**
@@ -9,6 +10,16 @@ public class LogoutResult {
    * @param message in case an error occurs
    */
   public LogoutResult(String message){}
+  public LogoutResult(){}
+
+  public String getAuthToken() {
+    return authToken;
+  }
+
+  public void setAuthToken(String authToken) {
+    this.authToken=authToken;
+  }
+
   public String getMessage() {
     return message;
   }

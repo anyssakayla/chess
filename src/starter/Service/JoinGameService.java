@@ -25,20 +25,25 @@ public class JoinGameService {
     GameDao gameDao = new GameDao();
     ChessGame.TeamColor teamColor;
     String requestAuth = request.getAuthToken();
-    String requestColor = request.getTeamColor().toLowerCase(Locale.ROOT);
     JoinGameResult result = new JoinGameResult();
+    String requestColor = request.getTeamColor();
+    String notNullColor = "test";
 
     authDao.getAuth(requestAuth); //make sure the request authToken is in the database
     result.setAuthToken(requestAuth);
     Game joinGame = gameDao.findGame(request.getGameID()); //make sure the gameID is valid
 
-    if(request.getTeamColor() == null){
+    if(requestColor == null){
       gameDao.claimSpot(request.getUsername(), request.getGameID(), null);
       result.setTeamColor(null);
       result.setUsername(request.getUsername());
       result.setGameID(request.getGameID());
     }
-     if(requestColor.equals("black")){ //if black, set teamcolor to black
+    if(request.getTeamColor() != null){ //if it is null, it will be an error to do lowercase
+      notNullColor = request.getTeamColor().toLowerCase(Locale.ROOT);
+    }
+
+     if(notNullColor.equals("black")){ //if black, set teamcolor to black
        teamColor = ChessGame.TeamColor.BLACK;
        if(joinGame.getBlackUsername() == null){ //make sure black player doesn't already exist
          result.setTeamColor("black");
@@ -51,7 +56,7 @@ public class JoinGameService {
          throw new IOException("Error: this spot is already taken");
        }
      }
-     else if(requestColor.equals("white")){
+     else if(notNullColor.equals("white")){
        teamColor = ChessGame.TeamColor.WHITE;
        if(joinGame.getWhiteUsername() == null){
          result.setTeamColor("white");
