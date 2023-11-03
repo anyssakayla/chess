@@ -1,9 +1,6 @@
 package passoffTests.serverTests;
 import Request.*;
-import Result.CreateGameResult;
-import Result.ListGameResult;
-import Result.LoginResult;
-import Result.RegisterResult;
+import Result.*;
 import chess.Model.AuthToken;
 import chess.Model.User;
 import dataAccess.DAO.AuthDao;
@@ -124,6 +121,29 @@ public class GameServiceTest { //ALL PASS
 
   @Test
   public void JoinGameTest()throws DataAccessException, IOException{
+    gameDao.clearGames();
+    CreateGameService createGameService = new CreateGameService();
+    JoinGameService joinGameService = new JoinGameService();
+    GameDao gameDao = new GameDao();
+    AuthDao authDao = new AuthDao();
+
+    CreateGameReq createGameReq = new CreateGameReq("joingame1");
+    authDao.insertAuth("Alilah");
+    //createGameReq.setAuthToken(authDao.getAuth("Alilah").getAuthToken());
+    CreateGameResult createGameResult = createGameService.createGame(createGameReq, authDao.getAuthStringByUsername("Alilah"));
+
+    int IDForGame =createGameResult.getGameID();
+    JoinGameReq joinGameReq = new JoinGameReq("white", IDForGame);
+    joinGameReq.setUsername("Alilah");
+    joinGameReq.setAuthToken(authDao.getAuthStringByUsername("Alilah"));
+    joinGameService.joinGame(joinGameReq, authDao.getAuthStringByUsername("Alilah"));
+
+
+    assertEquals("Alilah", gameDao.findGame(IDForGame).getWhiteUsername());
+  }
+
+  @Test
+  public void FailJoinGameTest()throws DataAccessException, IOException{
     CreateGameService createGameService = new CreateGameService();
     JoinGameService joinGameService = new JoinGameService();
     GameDao gameDao = new GameDao();
@@ -140,8 +160,13 @@ public class GameServiceTest { //ALL PASS
     joinGameReq.setAuthToken(authDao.getAuthStringByUsername("Alilah"));
     joinGameService.joinGame(joinGameReq, authDao.getAuthStringByUsername("Alilah"));
 
-    assertEquals("Alilah", gameDao.findGame(IDForGame).getWhiteUsername());
+    JoinGameReq joinGameReq2 = new JoinGameReq("white", IDForGame);
+    joinGameReq.setUsername("Michelle");
+    joinGameReq.setAuthToken(authDao.getAuthStringByUsername("Michelle"));
+    JoinGameResult result = joinGameService.joinGame(joinGameReq2, authDao.getAuthStringByUsername("Michelle"));
+    assertEquals("Error: already taken", result.getMessage());
   }
+  //Create another join
 
   @Test
   public void clearApplicationTest()throws DataAccessException{
