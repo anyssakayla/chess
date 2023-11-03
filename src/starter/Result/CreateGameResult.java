@@ -1,7 +1,7 @@
 package Result;
 
 public class CreateGameResult {
-  private int gameID;
+  private Integer gameID;
   private String authToken;
   private String gameName;
   private String message;

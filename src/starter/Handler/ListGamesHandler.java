@@ -15,8 +15,8 @@ public class ListGamesHandler {
     Gson gson = new Gson();
     ListGameService runService=new ListGameService();
 
-    ListGamesReq runRequest = gson.fromJson(request.body(), ListGamesReq.class);
-    ListGameResult runResult = runService.listGames(runRequest);
+    String auth = request.headers("authorization");
+    ListGameResult runResult = runService.listGames(auth);
 
     if(Objects.equals(runResult.getMessage(), "Error: description")){
       response.status(500); //set the status to 500 error status

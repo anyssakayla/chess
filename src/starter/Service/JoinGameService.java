@@ -1,14 +1,12 @@
 package Service;
 import chess.ChessGame;
-import chess.Model.AuthToken;
 import chess.Model.Game;
 import dataAccess.DAO.AuthDao;
-import dataAccess.DAO.UserDao;
 import dataAccess.DAO.GameDao;
 import Request.JoinGameReq;
 import Result.JoinGameResult;
 import dataAccess.DataAccessException;
-import java.io.IOException;
+
 import java.util.Locale;
 
 public class JoinGameService {
@@ -21,17 +19,24 @@ public class JoinGameService {
    * @return JoinGameResult object with information on if the request was successful
    * */
   public JoinGameResult joinGame(JoinGameReq request, String auth) throws DataAccessException {
-    AuthDao authDao = new AuthDao(); //TODO: Fix gameID like username with Dao's
+    AuthDao authDao = new AuthDao(); //TODO: request color is always null for some reason
     GameDao gameDao = new GameDao();
     ChessGame.TeamColor teamColor;
-    String requestAuth = request.getAuthToken();
     JoinGameResult result = new JoinGameResult();
-    String requestColor = request.getTeamColor();
+    String requestColor = request.getPlayerColor();
     String notNullColor = "test";
+//    if(Objects.equals(request.getTeamColor(), "BLACK")){
+//      requestColor = "black";
+//    }
 
    // authDao.getAuth(requestAuth); //make sure the request authToken is in the database
    // result.setAuthToken(requestAuth);
     Game joinGame = gameDao.findGame(request.getGameID()); //make sure the gameID is valid
+
+    if(joinGame == null){
+      result.setMessage("Error: bad request");
+      return result;
+    }
 
     if(authDao.getAuth(auth) == null){
       result.setMessage("Error: unauthorized");
@@ -42,8 +47,9 @@ public class JoinGameService {
 //      result.setMessage("Error: bad request");
 //      return result;
 //    }
-    if(request.getTeamColor() != null){ //if it is null, it will be an error to do lowercase
-      notNullColor = request.getTeamColor().toLowerCase(Locale.ROOT);
+
+    if(request.getPlayerColor() != null){ //if it is null, it will be an error to do lowercase
+      notNullColor = request.getPlayerColor().toLowerCase(Locale.ROOT);
     }
 
     if(requestColor == null){

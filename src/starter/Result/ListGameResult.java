@@ -1,22 +1,19 @@
 package Result;
-import Request.ListGamesReq;
 import chess.Model.Game;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 public class ListGameResult {
-  private Collection<Game> gamesInDatabase; //should i use an arrayList?
+  private Collection<Game> games; //should i use an arrayList?
   //used to be ArrayList<HashMap<String, Object>> gamesInDatabase
   private String message;
 
   /**
    * The result data for all the games listed under a user
    * @param message in case an error occurs
-   * @param gamesInDatabase the list of games to return
+   * @param games the list of games to return
    */
-  public ListGameResult(String message, Collection<Game> gamesInDatabase){}
+  public ListGameResult(String message, Collection<Game> games){}
   public ListGameResult(){}
   public String getMessage() {
     return message;
@@ -26,11 +23,11 @@ public class ListGameResult {
     this.message=message;
   }
 
-  public Collection<Game> getGamesInDatabase() {
-    return gamesInDatabase;
+  public Collection<Game> getGames() {
+    return games;
   }
 
-  public void setGamesInDatabase(Collection<Game> gamesInDatabase) {
-    this.gamesInDatabase=gamesInDatabase;
+  public void setGames(Collection<Game> games) {
+    this.games=games;
   }
 }

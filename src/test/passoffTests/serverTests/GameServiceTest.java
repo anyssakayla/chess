@@ -37,12 +37,16 @@ public class GameServiceTest { //ALL PASS
     authDao.clearAuthTokensInDB();
 
     RegisterReq registerReq = new RegisterReq("Alilah", "password", "alilah@gmail.com");
-
-    RegisterService regService = new RegisterService(); //TODO: register needs to give user an authtoken
+    RegisterService regService = new RegisterService();
     regService.register(registerReq);
-//    userDao.insertUser(new User("TestUsername", "TestPassword", "TestEmail"));
-//    userDao.insertUser(new User("Alilah", "password", "alilahEmail"));
-//    userDao.insertUser(new User("Michelle", "micellePassword", "MichelleEmail"));
+
+    RegisterReq registerReq2 = new RegisterReq("Michelle", "Password", "Michelle@gmail.com");
+    RegisterService regService2 = new RegisterService();
+    regService.register(registerReq2);
+
+    RegisterReq registerReq3 = new RegisterReq("TestUser", "pass", "test@gmail.com");
+    RegisterService regService3 = new RegisterService();
+    regService.register(registerReq3);
   }
 
   @Test
@@ -94,13 +98,13 @@ public class GameServiceTest { //ALL PASS
     CreateGameReq gameReq1 = new CreateGameReq("Game 1");
     gameReq1.setAuthToken(authDao.insertAuth("Alilah").getAuthToken()); //TODO: change to toString()?
     CreateGameReq gameReq2 = new CreateGameReq("Game 2");
-    gameReq2.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
+    gameReq2.setAuthToken(authDao.insertAuth("Michelle").getAuthToken());
     CreateGameReq gameReq3 = new CreateGameReq("Game 3");
-    gameReq3.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
+    gameReq3.setAuthToken(authDao.insertAuth("TestUser").getAuthToken());
 
-    gameService.createGame(gameReq1, "test1");
-    gameService.createGame(gameReq2, "test2");
-    gameService.createGame(gameReq3, "test3");
+    gameService.createGame(gameReq1, authDao.insertAuth("Alilah").getAuthToken());
+    gameService.createGame(gameReq2, authDao.insertAuth("Michelle").getAuthToken());
+    gameService.createGame(gameReq3, authDao.insertAuth("TestUser").getAuthToken());
 
     assertEquals(gameDao.findAll().size(), 3);
 
@@ -111,7 +115,8 @@ public class GameServiceTest { //ALL PASS
     gameDao.clearGames();
     ListGameService listGameService = new ListGameService();
     ListGamesReq listGamesReq = new ListGamesReq("fake game");
-    ListGameResult listGameResult = listGameService.listGames(listGamesReq);
+    String auth = listGamesReq.getAuthToken();
+    ListGameResult listGameResult = listGameService.listGames(auth);
 
     assertTrue(gameDao.findAll().isEmpty());
   }
@@ -124,10 +129,10 @@ public class GameServiceTest { //ALL PASS
     GameDao gameDao = new GameDao();
     AuthDao authDao = new AuthDao();
 
-    CreateGameReq createGameReq= new CreateGameReq("joingame1");
+    CreateGameReq createGameReq = new CreateGameReq("joingame1");
     authDao.insertAuth("Alilah");
-    createGameReq.setAuthToken(authDao.insertAuth("Alilah").getAuthToken());
-    CreateGameResult createGameResult = createGameService.createGame(createGameReq, "testauth");
+    //createGameReq.setAuthToken(authDao.getAuth("Alilah").getAuthToken());
+    CreateGameResult createGameResult = createGameService.createGame(createGameReq, authDao.getAuthStringByUsername("Alilah"));
 
     int IDForGame = createGameResult.getGameID();
     JoinGameReq joinGameReq = new JoinGameReq("white", IDForGame);

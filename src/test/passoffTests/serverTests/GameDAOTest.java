@@ -33,7 +33,8 @@ public class GameDAOTest {
 
   @Test
   public void falseGame() throws DataAccessException{
-    assertThrows(DataAccessException.class, () -> gameDao.findGame(240));
+    Game findFalseGame = gameDao.findGame(240);
+    assertNull(findFalseGame);
   }
 
   @Test
@@ -65,6 +66,7 @@ public class GameDAOTest {
 
   @Test
   public void ClaimFalseSpot()throws DataAccessException{
+
     assertThrows(DataAccessException.class, () -> gameDao.claimSpot("False user", 242, ChessGame.TeamColor.WHITE));
   }
 

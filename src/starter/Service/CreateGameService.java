@@ -27,21 +27,20 @@ public class CreateGameService {
       result.setMessage("Error: bad request");
       return result;
     }
-    //TODO: change this to auth
+
     if(authToken == null){
       result.setMessage("Error: unauthorized");
       return result;
     }
     if(authDao.getAuth(authToken) == null){
       result.setMessage("Error: unauthorized");
-
-      return result;
+      //result.setGameID(null);
+      return result; //result should not return a gameID
     }
     if(gameDao.findGameName(gameName) != null){
       result.setMessage("Error: game name already taken");
       return result;
     }
-
 
     authDao.getAuth(requestAuthToken); //make sure the request authToken is in the database to create a game
     gameDao.insertGame(gameName);

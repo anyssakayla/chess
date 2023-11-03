@@ -39,7 +39,7 @@ public class GameDao {
         return findGame;
       }
     }
-    throw new DataAccessException("This game does not exist in database;");
+    return null;
   }
 
   public Game findGameName(String gameName){
@@ -69,6 +69,9 @@ public class GameDao {
    * */
   public void claimSpot(String username, int gameID, ChessGame.TeamColor teamColor) throws DataAccessException {
     Game existingGame = findGame(gameID); //make sure the user is entering into a game that is in database
+    if(existingGame == null){ //might have to delete this
+      throw new DataAccessException("Username is null");
+    }
     if(teamColor == ChessGame.TeamColor.BLACK){
       existingGame.setBlackUsername(username);
     }
