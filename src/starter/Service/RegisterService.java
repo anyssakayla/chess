@@ -15,7 +15,6 @@ public class RegisterService {
    * @param request The register request
    * @return A RegisterResult object with information on if the request was successful
    * */
-  //TODO: Might have to delete DataAccessException throw
   public RegisterResult register(RegisterReq request) throws DataAccessException {
     User user = new User();
     AuthToken authToken = new AuthToken();
@@ -33,11 +32,8 @@ public class RegisterService {
       return result;
     }
 
-
-   // authToken.setAuthToken(request.getAuthToken().toString()); //pass in authToken from request
     authToken.setUsername(request.getUsername()); //set authToken for the result
     authDao.insertAuth(authToken); //insert authToken to Dao
-   // authDao.insertAuth(request.getUsername()); //create and insert authtoken for the new user
 
     user.setUsername(request.getUsername()); //set user parameters
     user.setEmail(request.getEmail());

@@ -1,4 +1,4 @@
-package passoffTests.serverTests;
+package ServiceTests;
 import Request.*;
 import Result.*;
 import chess.Model.AuthToken;

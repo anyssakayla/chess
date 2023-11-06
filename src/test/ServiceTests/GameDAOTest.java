@@ -1,4 +1,4 @@
-package passoffTests.serverTests;
+package ServiceTests;
 import dataAccess.DAO.GameDao;
 import chess.ChessGame;
 import chess.Model.Game;

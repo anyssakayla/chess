@@ -48,14 +48,4 @@ public class RegisterReq {
     this.email = email;
   }
 
-//  public AuthToken getAuthToken() throws DataAccessException {
-//    if(authToken == null){
-//      authToken = authDao.insertAuth(username);
-//    }
-//    return authToken;
-//  }
-//
-//  public void setAuthToken(AuthToken authToken) {
-//    this.authToken = authToken;
-//  }
 }

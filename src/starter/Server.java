@@ -16,15 +16,15 @@ public class Server {
 
     // Register a directory for hosting static files
     Spark.externalStaticFileLocation("web");
-    Spark.init(); 
+    Spark.init();
 
-    Spark.post("/session", (request, response) -> (new LoginHandler()).handle(request,response));
-    Spark.post("/user", (request, response) -> (new RegisterHandler()).handle(request,response));
-    Spark.delete("/db", (request, response) -> (new ClearHandler()).handle(request,response));
-    Spark.delete("/session", (request, response) -> (new LogoutHandler()).handle(request,response));
-    Spark.post("/game", (request, response) -> (new CreateGameHandler()).handle(request,response));
-    Spark.put("/game", (request, response) -> (new JoinGameHandler()).handle(request,response));
-    Spark.get("/game", (request, response) -> (new ListGamesHandler()).handle(request,response));
+    Spark.post("/session", (request, response) -> (new LoginHandler()).handle(request, response));
+    Spark.post("/user", (request, response) -> (new RegisterHandler()).handle(request, response));
+    Spark.delete("/db", (request, response) -> (new ClearHandler()).handle(request, response));
+    Spark.delete("/session", (request, response) -> (new LogoutHandler()).handle(request, response));
+    Spark.post("/game", (request, response) -> (new CreateGameHandler()).handle(request, response));
+    Spark.put("/game", (request, response) -> (new JoinGameHandler()).handle(request, response));
+    Spark.get("/game", (request, response) -> (new ListGamesHandler()).handle(request, response));
 
 
 

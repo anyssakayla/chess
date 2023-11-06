@@ -1,4 +1,4 @@
-package passoffTests.serverTests;
+package ServiceTests;
 import dataAccess.DAO.UserDao;
 import chess.Model.User;
 import java.util.Collection;

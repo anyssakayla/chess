@@ -110,20 +110,13 @@ public class GameDao {
   } //clears all game data from database
 
   public int createGameID(){ //TODO: FIX THIS FUNCTION
-//    Random random = new Random();
-//    int createID = random.nextInt(1000); //random int with the 1000 bound
-//    while (gamesInDB.contains(createID)){ //if it is already in database, make a new one
-//      createID = random.nextInt(1000);
-//    }
-//    return createID;
-
-    int createID = (int)(random() * 1000);
-    for(Game gameID : gamesInDB){
-      if(gameID.getGameID() == createID){
-        createGameID(); //if it already exists, recursively call createGameID until it is a unique ID
-      }
+    Random random = new Random();
+    int createID = random.nextInt(1000); //random int with the 1000 bound
+    while (gamesInDB.contains(createID)){ //if it is already in database, make a new one
+      createID = random.nextInt(1000);
     }
     return createID;
+
   }
 
   public int getGameID(String gameName) throws DataAccessException{

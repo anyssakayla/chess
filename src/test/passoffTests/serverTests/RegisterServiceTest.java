@@ -26,7 +26,7 @@ public class RegisterServiceTest {
     authDao.clearAuthTokensInDB();
 
     RegisterReq registerReq = new RegisterReq("Alilah", "password", "alilah@gmail.com");
-    //REquest needs an authToken
+
     RegisterService regService = new RegisterService(); //TODO: register needs to give user an authtoken
     regService.register(registerReq);
   }

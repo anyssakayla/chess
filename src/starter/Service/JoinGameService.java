@@ -25,12 +25,7 @@ public class JoinGameService {
     JoinGameResult result = new JoinGameResult();
     String requestColor = request.getPlayerColor();
     String notNullColor = "test";
-//    if(Objects.equals(request.getTeamColor(), "BLACK")){
-//      requestColor = "black";
-//    }
 
-   // authDao.getAuth(requestAuth); //make sure the request authToken is in the database
-   // result.setAuthToken(requestAuth);
     Game joinGame = gameDao.findGame(request.getGameID()); //make sure the gameID is valid
 
     if(joinGame == null){
@@ -42,11 +37,6 @@ public class JoinGameService {
       result.setMessage("Error: unauthorized");
       return result;
     }
-
-//    if(request.getGameID() < 999){
-//      result.setMessage("Error: bad request");
-//      return result;
-//    }
 
     if(request.getPlayerColor() != null){ //if it is null, it will be an error to do lowercase
       notNullColor = request.getPlayerColor().toLowerCase(Locale.ROOT);

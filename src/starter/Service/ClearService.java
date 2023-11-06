@@ -21,6 +21,6 @@ public class ClearService {
     userDao.clearUsersInDatabase();
     authDao.clearAuthTokensInDB();
 
-    return result; //TODO: add other conditions and fail statements? But clear shouls always be fine
+    return result;
   }
 }

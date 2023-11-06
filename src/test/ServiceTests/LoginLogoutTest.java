@@ -1,4 +1,4 @@
-package passoffTests.serverTests;
+package ServiceTests;
 import Request.LoginReq;
 import Request.LogoutReq;
 import Request.RegisterReq;
