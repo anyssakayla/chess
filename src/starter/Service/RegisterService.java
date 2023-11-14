@@ -7,6 +7,8 @@ import Request.RegisterReq;
 import Result.RegisterResult;
 import dataAccess.DataAccessException;
 
+import java.sql.SQLException;
+
 public class RegisterService {
 
   /**
@@ -17,7 +19,7 @@ public class RegisterService {
    * */
   public RegisterResult register(RegisterReq request) throws DataAccessException {
     User user = new User();
-    AuthToken authToken = new AuthToken();
+    AuthToken authToken = new AuthToken(); //also sets random authToken
     AuthDao authDao = new AuthDao();
     UserDao userDao = new UserDao();
     RegisterResult result = new RegisterResult();
@@ -34,6 +36,8 @@ public class RegisterService {
 
     authToken.setUsername(request.getUsername()); //set authToken for the result
     authDao.insertAuth(authToken); //insert authToken to Dao
+
+
 
     user.setUsername(request.getUsername()); //set user parameters
     user.setEmail(request.getEmail());

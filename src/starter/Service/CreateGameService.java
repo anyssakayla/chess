@@ -27,7 +27,7 @@ public class CreateGameService {
       result.setMessage("Error: bad request");
       return result;
     }
-
+    game.setGameName(gameName);
     if(authToken == null){
       result.setMessage("Error: unauthorized");
       return result;
@@ -42,12 +42,15 @@ public class CreateGameService {
       return result;
     }
 
+    game.setGameID(gameDao.insertGame(game));
     authDao.getAuth(requestAuthToken); //make sure the request authToken is in the database to create a game
-    gameDao.insertGame(gameName);
+    //gameDao.insertGame(gameName);
 
-    result.setGameID(gameDao.getGameID(gameName));
+    //result.setGameID(gameDao.getGameID(gameName));
+    result.setGameID(game.getGameID());
     result.setGameName(gameName);
     result.setAuthToken(requestAuthToken);
+
     return result;
   }
 }

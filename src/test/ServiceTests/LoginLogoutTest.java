@@ -43,7 +43,7 @@ public class LoginLogoutTest {
     LoginReq loginReq = new LoginReq("Alilah", "password");
     LoginResult loginResult = loginService.login(loginReq);
 
-    assertNotNull(authDao.getAuthStringByUsername("Alilah"));
+    assertNotNull(authDao.getAuthTokenByUsername("Alilah"));
   }
 
   @Test
@@ -57,14 +57,28 @@ public class LoginLogoutTest {
   }
 
   @Test
-  public void LogoutTest()throws DataAccessException{ //PASSES
-    authDao.clearAuthTokensInDB();
+  public void LogoutTest()throws DataAccessException, IOException{
+    LoginService loginService = new LoginService(); //login Alilah
+    LoginReq loginReq = new LoginReq("Alilah", "password");
+    String authForlogout;
+      LoginResult loginResult = loginService.login(loginReq);
+      authForlogout = loginResult.getAuthToken().toString();
+
+    //authDao.clearAuthTokensInDB();
+
     AuthDao authDao = new AuthDao();
-    LogoutService logoutService = new LogoutService();
-    LogoutReq logoutReq = new LogoutReq("Alilah", authDao.getAuthStringByUsername("Alilah"));
+    LogoutService logoutService = new LogoutService(); //Logout Alilah
+
+    //    AuthToken joinToken = new AuthToken();
+    //    joinToken.setUsername("TestUser");
+    //    authDao.insertAuth(joinToken);
+    //    createGameReq.setAuthToken(joinToken.getAuthToken());
+
+    //String authString = authDao.getAuthTokenByUsername("Alilah").toString();
+    LogoutReq logoutReq = new LogoutReq("Alilah", authForlogout);
     logoutService.logout(logoutReq.getAuthToken());
 
-    assertTrue(authDao.findAll().size() == 0);
+    assertNull(authDao.getAuth(authForlogout)); //make sure Alilah's authToken is gone
   }
 
   @Test
@@ -72,7 +86,7 @@ public class LoginLogoutTest {
     authDao.clearAuthTokensInDB();
     AuthDao authDao = new AuthDao();
     LogoutService logoutService = new LogoutService();
-    LogoutReq logoutReq = new LogoutReq("fakeUsername", authDao.getAuthStringByUsername("fakeUsername"));
+    LogoutReq logoutReq = new LogoutReq("fakeUsername", "fakeAuthToken");
     LogoutResult result = logoutService.logout(logoutReq.getAuthToken());
 
     assertEquals(result.getMessage(), "Error: unauthorized");

@@ -7,6 +7,8 @@ import Result.LogoutResult;
 import dataAccess.DAO.UserDao;
 import dataAccess.DataAccessException;
 
+import java.sql.SQLException;
+
 public class LogoutService {
 
   /**
@@ -19,12 +21,13 @@ public class LogoutService {
     //see if auth exists
     LogoutResult logoutResult = new LogoutResult();
     AuthDao authDao = new AuthDao(); //create the Authtoken to delete
-    UserDao userDao = new UserDao();
+
     if(authDao.getAuth(auth) == null){
       logoutResult.setMessage("Error: unauthorized");
       return logoutResult;
     }
     authDao.removeAuth(auth);
+
     logoutResult.setAuthToken(auth);
     return logoutResult;
   }

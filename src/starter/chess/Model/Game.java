@@ -3,9 +3,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
-import chess.ChessGame;
-import chess.ChessGameImpl;
+import chess.*;
+import com.google.gson.*;
+import com.google.protobuf.Type;
 import dataAccess.DAO.GameDao;
+
+import static chess.ChessPiece.PieceType.PAWN;
 
 public class Game {
   int gameID;
@@ -27,6 +30,14 @@ public class Game {
   }
 
   public Game() {}
+
+  public Game(int gameID, String whiteUsername, String blackUsername, String gameName, ChessGameImpl game){
+    this.gameID = gameID;
+    this.whiteUsername = whiteUsername;
+    this.blackUsername = blackUsername;
+    this.gameName = gameName;
+    this.game = game;
+  }
 
   public int getGameID() {
     return gameID;
@@ -64,7 +75,7 @@ public class Game {
     return game;
   }
 
-  public void setGame(ChessGame game) {
+  public void setGame(ChessGameImpl game) {
     this.game = game;
   }
 
@@ -116,8 +127,72 @@ public class Game {
     return gameEquals;
   }
 
+  public static Gson gsonSerializer(){
+    GsonBuilder gB = new GsonBuilder();
+    gB.registerTypeAdapter(Game.class, new ChessGameAdapter());
+    return gB.create();
+  }
+
+  public static class ChessGameAdapter implements JsonDeserializer<Game> {
+
+    @Override
+    public Game deserialize(JsonElement jsonElement, java.lang.reflect.Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+      GsonBuilder gsonBuilder = new GsonBuilder();
+      gsonBuilder.registerTypeAdapter(ChessBoardImpl.class, new ChessBoardAdapter());
+      var serializer = gsonBuilder.create();
+      return serializer.fromJson(jsonElement, Game.class);
+    }
+  }
+
+  public static class ChessBoardAdapter implements JsonDeserializer<ChessBoardImpl> {
+
+    @Override
+    public ChessBoardImpl deserialize(JsonElement jsonElement, java.lang.reflect.Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+      GsonBuilder gsonBuilder=new GsonBuilder();
+      gsonBuilder.registerTypeAdapter(ChessPieceImpl.class, new ChessPieceAdapter());
+      var serializer=gsonBuilder.create();
+      return serializer.fromJson(jsonElement, ChessBoardImpl.class);
+    }
+  }
+
+
+
+  public static class ChessPieceAdapter implements JsonDeserializer<ChessPieceImpl> {
+
+    @Override
+    public ChessPieceImpl deserialize(JsonElement jsonElement, java.lang.reflect.Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+      var newPiece=new Gson().fromJson(jsonElement, ChessPieceImpl.class);
+      var pieceType=newPiece.getPieceType();
+      var pieceColor=newPiece.getTeamColor();
+      switch (pieceType) {
+        case PAWN:
+          return new Pawn(pieceColor);
+        //break;
+        case ROOK:
+          return new Rook(pieceColor);
+        //break;
+        case KNIGHT:
+          return new Knight(pieceColor);
+        //break;
+        case BISHOP:
+          return new Bishop(pieceColor);
+        //break;
+        case QUEEN:
+          return new Queen(pieceColor);
+        //break;
+        case KING:
+          return new King(pieceColor);
+        //break;
+      }
+      return new ChessPieceImpl(pieceColor, pieceType);
+    }
+  }
+
+
+  }
+
 //  @Override
 //  public int hashCode() {
 //    return Objects.hash(gameID, whiteUsername, blackUsername, gameName, game, gameObserver);
 //  }
-}
+

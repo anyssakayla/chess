@@ -1,7 +1,11 @@
 package chess;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -9,6 +13,9 @@ public class ChessGameImpl implements ChessGame{
   public ChessBoard chessBoard = new ChessBoardImpl();
   public TeamColor teamColor;
 
+  public ChessGameImpl(){
+
+  }
   //example shown in class
 //  public static ChessGameImpl create(String serializer){
 //    var x = new Gson().fromJson(serializedGame, ChessGameImpl.class);
@@ -20,6 +27,14 @@ public class ChessGameImpl implements ChessGame{
 //
 //    return x;
 //  }
+  public static class ChessGameAdapter implements JsonDeserializer<ChessGame> {
+    public ChessGame deserialize(JsonElement element, Type type, JsonDeserializationContext context){
+      GsonBuilder builder = new GsonBuilder();
+      //builder.registerTypeAdapter(ChessBoard.class, new ChessBoardAdapter());
+      var serializer = builder.create();
+      return serializer.fromJson(element, ChessGameImpl.class);
+    }
+  }
 
   @Override
   public TeamColor getTeamTurn() {

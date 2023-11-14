@@ -19,7 +19,7 @@ public class JoinGameService {
    * @return JoinGameResult object with information on if the request was successful
    * */
   public JoinGameResult joinGame(JoinGameReq request, String auth) throws DataAccessException {
-    AuthDao authDao = new AuthDao(); //TODO: request color is always null for some reason
+    AuthDao authDao = new AuthDao();
     GameDao gameDao = new GameDao();
     ChessGame.TeamColor teamColor;
     JoinGameResult result = new JoinGameResult();

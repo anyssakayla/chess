@@ -7,8 +7,10 @@ import dataAccess.DAO.UserDao;
 import Request.LoginReq;
 import Result.LoginResult;
 import dataAccess.DataAccessException;
-
+import java.sql.Connection;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.UUID;
 
 public class LoginService {
 
@@ -36,6 +38,9 @@ public class LoginService {
       //throw new IOException("Error: unauthorized");
     }
     result.setUsername(request.getUsername());
-    result.setAuthToken(authDao.insertAuth(request.getUsername()).getAuthToken());
+    AuthToken token = new AuthToken(UUID.randomUUID().toString(), request.getUsername());
+    result.setAuthToken(token.getAuthToken());
+
+
     return result;}
 }

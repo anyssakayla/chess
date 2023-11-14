@@ -2,7 +2,6 @@ package ServiceTests;
 import java.util.Collection;
 import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
-
 import chess.Model.User;
 import dataAccess.DAO.UserDao;
 import dataAccess.DataAccessException;
@@ -27,21 +26,19 @@ public class AuthDAOTest {
 
   @Test
   public void createAuthToken() throws DataAccessException{ //only works when taking off condition to check if user is in userDao
+    AuthToken authToCreate = new AuthToken();
     userDao.findUser("Alilah");
-    AuthToken authToCreate = authDao.insertAuth("Alilah");
+    authToCreate.setUsername("Alilah");
+    authDao.insertAuth(authToCreate);
     assertEquals(authToCreate.getUsername(), "Alilah");
     assertNotNull(authToCreate.getAuthToken());
     System.out.println(authToCreate.getAuthToken());
   }
   @Test
   public void falseAuthToken() throws DataAccessException{
-    assertThrows(DataAccessException.class, ()-> authDao.insertAuth("fake"));
+    AuthToken AlilahAuth = authDao.getAuthTokenByUsername("Alilah");
+    assertThrows(DataAccessException.class, ()-> authDao.insertAuth(AlilahAuth));
   }
 
-//  @Test
-//  public void duplicateAuthCheck()throws DataAccessException{
-//    //TODO: create auth test yourself to see how they are getting duplicated
-//    //start off loging the person in
-//    //TODO: maybe start off checking this in the loginTest because login is already done
-//  }
+
 }

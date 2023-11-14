@@ -5,6 +5,7 @@ import dataAccess.DAO.UserDao;
 import Request.ClearAppReq;
 import Request.CreateGameReq;
 import Result.ClearAppResult;
+import dataAccess.DataAccessException;
 
 public class ClearService {
   public ClearService(){}
@@ -15,7 +16,7 @@ public class ClearService {
    * Clears all information from the database
    * @return A ClearResult object with information on if the request was completed
    * */
-  public ClearAppResult clearApplication(ClearAppReq request){
+  public ClearAppResult clearApplication(ClearAppReq request) throws DataAccessException {
     ClearAppResult result = new ClearAppResult();
     gameDao.clearGames();
     userDao.clearUsersInDatabase();

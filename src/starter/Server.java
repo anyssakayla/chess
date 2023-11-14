@@ -1,4 +1,6 @@
 import Handler.*;
+import dataAccess.DataAccessException;
+import dataAccess.Database;
 import spark.Spark;
 import spark.Request;
 import spark.Response;
@@ -7,14 +9,20 @@ import Handler.CreateGameHandler;
 public class Server {
 
   public static void main(String args[]){
+    try {
+      new CreateDB().establishDatabase();
+    } catch (DataAccessException e) {
+      e.printStackTrace();
+    }
     Server.run();
-    //run();
   }
+
+
   public static void run() {
     // Specify the port you want the server to listen on
     Spark.port(8080);
 
-    // Register a directory for hosting static files
+
     Spark.externalStaticFileLocation("web");
     Spark.init();
 

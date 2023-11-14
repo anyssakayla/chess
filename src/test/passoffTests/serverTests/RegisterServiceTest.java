@@ -27,7 +27,7 @@ public class RegisterServiceTest {
 
     RegisterReq registerReq = new RegisterReq("Alilah", "password", "alilah@gmail.com");
 
-    RegisterService regService = new RegisterService(); //TODO: register needs to give user an authtoken
+    RegisterService regService = new RegisterService();
     regService.register(registerReq);
   }
 
@@ -41,7 +41,7 @@ public class RegisterServiceTest {
     assertEquals(userToTest.getPassword(),"password");
     assertEquals(userToTest.getEmail(), "alilah@gmail.com");
 
-    assertFalse(authDao.findAll().isEmpty());
+    assertNotNull(authDao.getAuthTokenByUsername("Alilah"));
   }
 
   @Test
