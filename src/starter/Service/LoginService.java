@@ -1,15 +1,13 @@
 package Service;
-import Result.RegisterResult;
-import chess.Model.AuthToken;
-import chess.Model.User;
+import Model.AuthToken;
+import Model.User;
 import dataAccess.DAO.AuthDao;
 import dataAccess.DAO.UserDao;
 import Request.LoginReq;
 import Result.LoginResult;
 import dataAccess.DataAccessException;
-import java.sql.Connection;
+
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.UUID;
 
 public class LoginService {
@@ -40,6 +38,10 @@ public class LoginService {
     result.setUsername(request.getUsername());
     AuthToken token = new AuthToken(UUID.randomUUID().toString(), request.getUsername());
     result.setAuthToken(token.getAuthToken());
+    //    authToken.setUsername(request.getUsername());
+    //    authDao.insertAuth(authToken);
+    token.setUsername(request.getUsername());
+    authDao.insertAuth(token); //this is not adding to the database;
 
 
     return result;}

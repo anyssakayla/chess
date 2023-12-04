@@ -1,17 +1,13 @@
 package dataAccess.DAO;
 import dataAccess.Database;
-import chess.Model.AuthToken;
+import Model.AuthToken;
 import dataAccess.DataAccessException;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.HashSet;
 import java.util.Collection;
-import java.util.UUID;
-import java.sql.DriverManager;
 
 public class AuthDao {
   static UserDao currUser = new UserDao();

@@ -1,11 +1,9 @@
 package dataAccess.DAO;
-import static java.lang.Math.random;
 
-import chess.ChessBoard;
 import chess.ChessBoardImpl;
 import com.google.gson.*;
 import dataAccess.DataAccessException;
-import chess.Model.Game;
+import Model.Game;
 import chess.ChessGame;
 import chess.ChessGameImpl;
 import dataAccess.Database;
@@ -15,10 +13,6 @@ import java.sql.*;
 import java.util.Collection;
 import java.util.HashSet;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import static java.lang.Math.random;
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 

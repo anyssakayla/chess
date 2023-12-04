@@ -1,7 +1,5 @@
 package Request;
-import chess.Model.AuthToken;
-import dataAccess.DAO.AuthDao;
-import dataAccess.DataAccessException;
+import Model.AuthToken;
 
 public class RegisterReq {
   private String username;

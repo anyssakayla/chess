@@ -1,9 +1,6 @@
 import dataAccess.DataAccessException;
 import dataAccess.Database;
 
-import javax.xml.crypto.Data;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.sql.SQLException;
 
 public class CreateDB {

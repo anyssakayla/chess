@@ -1,13 +1,11 @@
 package Handler;
 import Service.LogoutService;
-import Request.LogoutReq;
 import Result.LogoutResult;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
 import spark.Request;
 import spark.Response;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class LogoutHandler {

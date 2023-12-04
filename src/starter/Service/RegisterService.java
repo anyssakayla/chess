@@ -1,13 +1,11 @@
 package Service;
-import chess.Model.AuthToken;
-import chess.Model.User;
+import Model.AuthToken;
+import Model.User;
 import dataAccess.DAO.AuthDao;
 import dataAccess.DAO.UserDao;
 import Request.RegisterReq;
 import Result.RegisterResult;
 import dataAccess.DataAccessException;
-
-import java.sql.SQLException;
 
 public class RegisterService {
 
@@ -36,7 +34,6 @@ public class RegisterService {
 
     authToken.setUsername(request.getUsername()); //set authToken for the result
     authDao.insertAuth(authToken); //insert authToken to Dao
-
 
 
     user.setUsername(request.getUsername()); //set user parameters

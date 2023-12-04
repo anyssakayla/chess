@@ -3,7 +3,7 @@ package passoffTests.serverTests;
 import Request.RegisterReq;
 import Result.RegisterResult;
 import Service.RegisterService;
-import chess.Model.User;
+import Model.User;
 import dataAccess.DAO.AuthDao;
 import dataAccess.DAO.GameDao;
 import dataAccess.DAO.UserDao;

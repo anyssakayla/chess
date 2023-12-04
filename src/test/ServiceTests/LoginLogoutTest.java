@@ -3,7 +3,6 @@ import Request.LoginReq;
 import Request.LogoutReq;
 import Request.RegisterReq;
 import Service.RegisterService;
-import chess.Model.User;
 import Service.LoginService;
 import Service.LogoutService;
 import Result.LoginResult;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 
 public class LoginLogoutTest {

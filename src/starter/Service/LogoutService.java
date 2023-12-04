@@ -1,13 +1,7 @@
 package Service;
-import chess.Model.AuthToken;
-import chess.Model.User;
 import dataAccess.DAO.AuthDao;
-import Request.LogoutReq;
 import Result.LogoutResult;
-import dataAccess.DAO.UserDao;
 import dataAccess.DataAccessException;
-
-import java.sql.SQLException;
 
 public class LogoutService {
 

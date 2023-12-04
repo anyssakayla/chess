@@ -1,22 +1,17 @@
 package ServiceTests;
 import Request.*;
 import Result.*;
-import chess.Model.AuthToken;
-import chess.Model.User;
+import Model.AuthToken;
+import Model.User;
 import dataAccess.DAO.AuthDao;
 import dataAccess.DAO.UserDao;
 import dataAccess.DAO.GameDao;
 import Service.*;
-import chess.ChessGame;
-import chess.Model.Game;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 import dataAccess.DataAccessException;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

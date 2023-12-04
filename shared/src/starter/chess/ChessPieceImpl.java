@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 public class ChessPieceImpl implements ChessPiece{
   public ChessGame.TeamColor teamColor = null;

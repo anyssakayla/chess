@@ -1,4 +1,4 @@
-package chess.Model;
+package Model;
 import java.util.UUID;
 
 public class AuthToken {

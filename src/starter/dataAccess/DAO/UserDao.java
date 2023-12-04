@@ -1,15 +1,12 @@
 package dataAccess.DAO;
-import chess.ChessGameImpl;
-import chess.Model.Game;
-import chess.Model.User;
+import Model.User;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
 
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Collection;
-import java.util.UUID;
-import dataAccess.DAO.UserDao;
+
 import dataAccess.Database;
 
 public class UserDao {

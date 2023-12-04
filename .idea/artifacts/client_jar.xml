@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/client_jar</output-path>
+    <root id="root">
+      <element id="archive" name="client.jar">
+        <element id="module-output" name="client" />
+        <element id="module-output" name="shared" />
+      </element>
+      <element id="library" level="project" name="google.code.gson" />
+      <element id="library" level="project" name="slf4j.simple" />
+    </root>
+  </artifact>
+</component>

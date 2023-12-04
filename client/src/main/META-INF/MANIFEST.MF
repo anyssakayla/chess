@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: ui.ClientMain
+Class-Path: gson-2.10.1.jar slf4j-simple-1.7.36.jar slf4j-api-1.7.36.jar
+

@@ -1,10 +1,8 @@
 package ServiceTests;
 import dataAccess.DAO.GameDao;
 import chess.ChessGame;
-import chess.Model.Game;
+import Model.Game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;

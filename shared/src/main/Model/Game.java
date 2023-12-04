@@ -1,14 +1,11 @@
-package chess.Model;
+package Model;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 
 import chess.*;
 import com.google.gson.*;
-import com.google.protobuf.Type;
-import dataAccess.DAO.GameDao;
-
-import static chess.ChessPiece.PieceType.PAWN;
+//import com.google.protobuf.Type;
+//import dataAccess.DAO.GameDao;
 
 public class Game {
   int gameID;

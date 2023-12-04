@@ -1,7 +1,6 @@
 package Service;
-import chess.Model.Game;
+import Model.Game;
 import dataAccess.DAO.AuthDao;
-import dataAccess.DAO.UserDao;
 import dataAccess.DAO.GameDao;
 import Request.CreateGameReq;
 import Result.CreateGameResult;

@@ -3,8 +3,6 @@ import Request.RegisterReq;
 import Result.RegisterResult;
 import Service.RegisterService;
 import com.google.gson.Gson;
-import java.io.*;
-import java.net.HttpURLConnection;
 import dataAccess.DataAccessException;
 import spark.Request;
 import spark.Response;

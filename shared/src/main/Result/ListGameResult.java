@@ -1,5 +1,5 @@
 package Result;
-import chess.Model.Game;
+import Model.Game;
 
 import java.util.Collection;
 

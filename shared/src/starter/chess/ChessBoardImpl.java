@@ -1,6 +1,4 @@
 package chess;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class ChessBoardImpl implements ChessBoard{
 

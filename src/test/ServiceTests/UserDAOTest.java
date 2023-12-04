@@ -1,11 +1,9 @@
 package ServiceTests;
 import dataAccess.DAO.UserDao;
-import chess.Model.User;
-import java.util.Collection;
-import java.util.HashSet;
+import Model.User;
+
 import static org.junit.jupiter.api.Assertions.*;
 import dataAccess.DataAccessException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,5 @@
 package Handler;
 import Service.ListGameService;
-import Request.ListGamesReq;
 import Result.ListGameResult;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
@@ -15,7 +14,7 @@ public class ListGamesHandler {
     Gson gson = new Gson();
     ListGameService runService=new ListGameService();
 
-    String auth = request.headers("authorization");
+    String auth = request.headers("Authorization");
     ListGameResult runResult = runService.listGames(auth);
 
     if(Objects.equals(runResult.getMessage(), "Error: description")){
