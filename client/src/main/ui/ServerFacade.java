@@ -201,8 +201,8 @@ public class ServerFacade {
             System.out.println("GameID: " + gameID);
             System.out.println("White Username: " + whiiteUser);
             System.out.println("Black Username: " + blackUser);
-            return " ";
           }
+          return " ";
         }else if(statusCode == 400){
           System.out.println("Bad request. Please try again");
           return null;
